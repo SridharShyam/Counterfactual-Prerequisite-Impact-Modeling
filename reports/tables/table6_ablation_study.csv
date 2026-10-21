@@ -1,0 +1,4 @@
+Model_Variant,Test_ROC_AUC,Log_Loss,Brier_Score,Prereq_Topology_Preserved,Description
+Full Proposed Framework (GNN + Prerequisite Graph),0.7014,0.4779,0.153,True,Complete system with relational graph message passing.
+Ablation A: No Prerequisite Graph (MLP Target Only),0.6917,0.4633,0.1454,False,Removes graph adjacency; isolates target concept without relational context.
+Ablation B: Baseline Logistic Model (Handcrafted Features),0.6238,0.515,0.1658,Partial (Mean Prereq Only),Standard logistic regression using scalar prerequisite mastery average.

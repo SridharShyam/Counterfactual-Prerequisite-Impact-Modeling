@@ -1,0 +1,173 @@
+{
+  "student_uid": 8572,
+  "target_kc_id": 4,
+  "target_kc_name_en": "Object quantity combination",
+  "factual_mastery": 0.5,
+  "primary_intervention_level": 0.85,
+  "impact_rankings": [
+    {
+      "kc_id": 0,
+      "current_mastery": 0.5,
+      "intervention_level": 0.85,
+      "factual_target_prediction": 0.808,
+      "counterfactual_target_prediction": 0.8129,
+      "estimated_impact": 0.0049,
+      "relationship": "direct_prerequisite",
+      "causal_disclaimer": "Model-based counterfactual estimate under simulated feature intervention, not verified experimental causal effect.",
+      "kc_name_en": "Other types in the multiplication principle"
+    },
+    {
+      "kc_id": 2,
+      "current_mastery": 0.627995491027832,
+      "intervention_level": 0.85,
+      "factual_target_prediction": 0.808,
+      "counterfactual_target_prediction": 0.8111,
+      "estimated_impact": 0.003,
+      "relationship": "direct_prerequisite",
+      "causal_disclaimer": "Model-based counterfactual estimate under simulated feature intervention, not verified experimental causal effect.",
+      "kc_name_en": "Item matching"
+    }
+  ],
+  "sensitivity_analysis": {
+    "0.6": [
+      {
+        "kc_id": 0,
+        "current_mastery": 0.5,
+        "intervention_level": 0.6,
+        "factual_target_prediction": 0.808,
+        "counterfactual_target_prediction": 0.8093,
+        "estimated_impact": 0.0012,
+        "relationship": "direct_prerequisite",
+        "causal_disclaimer": "Model-based counterfactual estimate under simulated feature intervention, not verified experimental causal effect.",
+        "kc_name_en": "Other types in the multiplication principle"
+      },
+      {
+        "kc_id": 2,
+        "current_mastery": 0.627995491027832,
+        "intervention_level": 0.6,
+        "factual_target_prediction": 0.808,
+        "counterfactual_target_prediction": 0.8077,
+        "estimated_impact": -0.0004,
+        "relationship": "direct_prerequisite",
+        "causal_disclaimer": "Model-based counterfactual estimate under simulated feature intervention, not verified experimental causal effect.",
+        "kc_name_en": "Item matching"
+      }
+    ],
+    "0.75": [
+      {
+        "kc_id": 0,
+        "current_mastery": 0.5,
+        "intervention_level": 0.75,
+        "factual_target_prediction": 0.808,
+        "counterfactual_target_prediction": 0.8114,
+        "estimated_impact": 0.0034,
+        "relationship": "direct_prerequisite",
+        "causal_disclaimer": "Model-based counterfactual estimate under simulated feature intervention, not verified experimental causal effect.",
+        "kc_name_en": "Other types in the multiplication principle"
+      },
+      {
+        "kc_id": 2,
+        "current_mastery": 0.627995491027832,
+        "intervention_level": 0.75,
+        "factual_target_prediction": 0.808,
+        "counterfactual_target_prediction": 0.8097,
+        "estimated_impact": 0.0017,
+        "relationship": "direct_prerequisite",
+        "causal_disclaimer": "Model-based counterfactual estimate under simulated feature intervention, not verified experimental causal effect.",
+        "kc_name_en": "Item matching"
+      }
+    ],
+    "0.85": [
+      {
+        "kc_id": 0,
+        "current_mastery": 0.5,
+        "intervention_level": 0.85,
+        "factual_target_prediction": 0.808,
+        "counterfactual_target_prediction": 0.8129,
+        "estimated_impact": 0.0049,
+        "relationship": "direct_prerequisite",
+        "causal_disclaimer": "Model-based counterfactual estimate under simulated feature intervention, not verified experimental causal effect.",
+        "kc_name_en": "Other types in the multiplication principle"
+      },
+      {
+        "kc_id": 2,
+        "current_mastery": 0.627995491027832,
+        "intervention_level": 0.85,
+        "factual_target_prediction": 0.808,
+        "counterfactual_target_prediction": 0.8111,
+        "estimated_impact": 0.003,
+        "relationship": "direct_prerequisite",
+        "causal_disclaimer": "Model-based counterfactual estimate under simulated feature intervention, not verified experimental causal effect.",
+        "kc_name_en": "Item matching"
+      }
+    ],
+    "0.95": [
+      {
+        "kc_id": 0,
+        "current_mastery": 0.5,
+        "intervention_level": 0.95,
+        "factual_target_prediction": 0.808,
+        "counterfactual_target_prediction": 0.8145,
+        "estimated_impact": 0.0064,
+        "relationship": "direct_prerequisite",
+        "causal_disclaimer": "Model-based counterfactual estimate under simulated feature intervention, not verified experimental causal effect.",
+        "kc_name_en": "Other types in the multiplication principle"
+      },
+      {
+        "kc_id": 2,
+        "current_mastery": 0.627995491027832,
+        "intervention_level": 0.95,
+        "factual_target_prediction": 0.808,
+        "counterfactual_target_prediction": 0.8124,
+        "estimated_impact": 0.0044,
+        "relationship": "direct_prerequisite",
+        "causal_disclaimer": "Model-based counterfactual estimate under simulated feature intervention, not verified experimental causal effect.",
+        "kc_name_en": "Item matching"
+      }
+    ]
+  },
+  "learning_path": {
+    "target_kc": 4,
+    "target_kc_name_en": "Object quantity combination",
+    "total_steps": 3,
+    "ordered_kc_sequence": [
+      0,
+      2,
+      4
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "kc_id": 0,
+        "kc_name_en": "Other types in the multiplication principle",
+        "kc_name_zh": "\u4e58\u6cd5\u539f\u7406\u91cc\u7684\u5176\u4ed6\u7c7b\u578b",
+        "current_mastery": 0.5,
+        "estimated_impact": 0.0049,
+        "is_target": false,
+        "rationale": "Prerequisite Concept: Current mastery is 50.0%. Improves target probability by +0.5%."
+      },
+      {
+        "step_number": 2,
+        "kc_id": 2,
+        "kc_name_en": "Item matching",
+        "kc_name_zh": "\u7269\u54c1\u642d\u914d",
+        "current_mastery": 0.628,
+        "estimated_impact": 0.003,
+        "is_target": false,
+        "rationale": "Prerequisite Concept: Current mastery is 62.8%. Improves target probability by +0.3%."
+      },
+      {
+        "step_number": 3,
+        "kc_id": 4,
+        "kc_name_en": "Object quantity combination",
+        "kc_name_zh": "\u7269\u4f53\u6570\u91cf\u7ec4\u5408",
+        "current_mastery": 0.5,
+        "estimated_impact": 0.0,
+        "is_target": true,
+        "rationale": "Target Concept: Goal of the personalized learning progression."
+      }
+    ],
+    "pedagogical_constraint": "Topologically ordered so all prerequisite foundations precede advanced dependent topics."
+  },
+  "scientific_caveat": "Estimates reflect predictive behavior under hypothetical state modifications, not verified causal proof."
+}

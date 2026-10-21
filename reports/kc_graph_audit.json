@@ -1,0 +1,14 @@
+{
+  "num_nodes": 1175,
+  "num_edges": 1062,
+  "is_directed": true,
+  "is_dag": true,
+  "num_isolated_nodes": 443,
+  "num_weakly_connected_components": 638,
+  "avg_in_degree": 0.9038297872340425,
+  "avg_out_degree": 0.9038297872340425,
+  "max_in_degree": 6,
+  "max_out_degree": 6,
+  "semantics_label": "Hierarchy-Derived Candidate Prerequisite Graph (Taxonomy Cluster Projection)",
+  "causal_disclaimer": "Graph represents educational taxonomy and co-occurrence constraints, not experimentally verified causal links."
+}

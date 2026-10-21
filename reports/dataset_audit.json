@@ -1,0 +1,35 @@
+{
+  "dataset_name": "XES3G5M (Chinese Mathematics Online Learning)",
+  "domain": "Mathematics",
+  "file_inventory_count": 3881,
+  "total_dataset_size_gb": 8.049,
+  "question_metadata_count": 7652,
+  "kc_metadata_count": 1175,
+  "kc_english_translated_count": 1175,
+  "train_valid_total_sequences": 33397,
+  "train_valid_folds": {
+    "0": 6669,
+    "1": 6669,
+    "2": 6697,
+    "3": 6677,
+    "4": 6685
+  },
+  "unique_students_train_valid": 14453,
+  "unique_observed_kcs_train_valid": 865,
+  "unique_observed_questions_train_valid": 7618,
+  "response_values_observed": [
+    0,
+    1
+  ],
+  "sequence_lengths": {
+    "min": 3,
+    "max": 200,
+    "mean": 153.88,
+    "median": 200.0
+  },
+  "test_sequences": 3613,
+  "test_students": 3613,
+  "test_observed_kcs": 828,
+  "student_leakage_overlap": 0,
+  "leakage_assessment": "Zero student overlap detected between train_valid and test partitions. Clean student-level holdout partition."
+}

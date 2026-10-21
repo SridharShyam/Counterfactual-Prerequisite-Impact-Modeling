@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Counterfactual Prerequisite Impact Modeling research prototype for personalized learning path generation using Graph Neural Networks.">
+  <title>CFLP Research Dashboard &mdash; Prerequisite Impact Modeling</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="app-header">
+    <div class="brand-section">
+      <div class="brand-icon" aria-hidden="true">&Gamma;</div>
+      <div>
+        <h1 class="brand-title">CFLP Research Platform</h1>
+        <p class="brand-subtitle">Counterfactual Prerequisite Impact Modeling for Personalized Learning Paths</p>
+      </div>
+    </div>
+    <div class="nav-actions">
+      <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle light or dark theme">
+        <span id="themeIcon" aria-hidden="true">&#9728;</span>
+        <span id="themeText">Dark Theme</span>
+      </button>
+      <a href="/docs" target="_blank" rel="noopener noreferrer" class="btn api-doc-link">
+        API Docs (OpenAPI)
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="main-container">
+    
+    <!-- Epistemological Disclaimer Banner -->
+    <div class="research-alert" role="region" aria-label="Research and Causal Disclaimer">
+      <strong>Epistemological Distinction:</strong> These predictions represent <em>model-based counterfactual impact estimates</em> generated via message-passing Graph Neural Networks over educational taxonomy relationships. They evaluate the sensitivity of the model's feature space to hypothetical concept mastery perturbations and do not claim unproven real-world causal certainty without controlled pedagogical trials.
+    </div>
+
+    <div class="dashboard-grid">
+
+      <!-- Left Column: Controls and Target Concept Selector -->
+      <section class="col-4" aria-labelledby="controlsHeading">
+        <div class="card">
+          <div class="card-header">
+            <h2 id="controlsHeading" class="card-title">Intervention Setup</h2>
+            <span class="badge badge-primary">Model: GNN</span>
+          </div>
+
+          <!-- Target Concept Selector -->
+          <div class="form-group">
+            <label for="targetConceptSelect" class="form-label">Select Target Knowledge Component (Goal):</label>
+            <select id="targetConceptSelect" class="form-select">
+              <option value="" disabled selected>Loading concepts...</option>
+            </select>
+          </div>
+
+          <!-- Selected Concept Metadata Display -->
+          <div id="targetMetadataCard" class="prereq-status-card">
+            <div class="prereq-status-eyebrow">PREREQUISITE STATUS</div>
+            <div id="targetPrereqCount" class="prereq-status-val">--</div>
+          </div>
+
+          <!-- Intervention Level Config -->
+          <div class="form-group">
+            <label for="interventionRange" class="form-label">
+              Hypothetical Intervention Mastery (&theta;): 
+              <span id="interventionValDisplay" class="intervention-label-display">0.85</span>
+            </label>
+            <input type="range" id="interventionRange" min="0.5" max="1.0" step="0.05" value="0.85" class="form-input range-slider-input">
+            <div class="range-slider-ticks">
+              <span>0.50 (Prior)</span>
+              <span>0.85 (Standard)</span>
+              <span>1.00 (Complete)</span>
+            </div>
+          </div>
+
+          <!-- Student Profile Presets -->
+          <div class="form-group">
+            <label for="studentPresetSelect" class="form-label">Student Test Profile:</label>
+            <select id="studentPresetSelect" class="form-select">
+              <option value="test_student_8572">Student 8572 (Holdout Test &mdash; Arithmetic)</option>
+              <option value="weak_foundations">Synthetic Profile (Weak Prerequisite Foundations)</option>
+              <option value="intermediate">Synthetic Profile (Intermediate Progress)</option>
+            </select>
+          </div>
+
+          <button id="runAnalysisBtn" class="btn btn-primary btn-full-width">
+            Run Counterfactual Analysis
+          </button>
+        </div>
+
+        <!-- System Architecture & Verification Card -->
+        <div class="card status-card-spacing">
+          <div class="card-header">
+            <h3 class="card-title">System Status</h3>
+            <span id="systemStatusBadge" class="badge badge-success">Checking...</span>
+          </div>
+          <div class="status-metric-list">
+            <div class="status-metric-row">
+              <span>Dataset Split:</span>
+              <strong class="text-emphasis-strong">0% Student Leakage Holdout</strong>
+            </div>
+            <div class="status-metric-row">
+              <span>Graph Directed Edges:</span>
+              <strong id="metaEdgeCount" class="text-emphasis-strong">1,062</strong>
+            </div>
+            <div class="status-metric-row">
+              <span>Graph Topology:</span>
+              <strong class="text-emphasis-strong">Verified DAG</strong>
+            </div>
+            <div class="status-metric-row">
+              <span>GNN Test ROC-AUC:</span>
+              <strong class="text-success-strong">0.6993 (+0.0740)</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Counterfactual Rankings & Generated Learning Path -->
+      <section class="col-8" aria-labelledby="resultsHeading">
+        
+        <!-- Factual Target Baseline Display -->
+        <div class="card section-card-spacing">
+          <div class="card-header">
+            <h2 id="resultsHeading" class="card-title">Factual Target Concept State</h2>
+            <span class="badge badge-primary">Baseline Probability</span>
+          </div>
+          <div class="factual-display-row">
+            <div id="factualProbabilityDisplay" class="factual-large-val">
+              --%
+            </div>
+            <p class="factual-desc-text">
+              Current estimated probability of future success on the target concept without prerequisite intervention.
+            </p>
+          </div>
+        </div>
+
+        <!-- Interactive Concept Graph Visualization (GNN Prerequisite Topology) -->
+        <div class="card section-card-spacing">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">GNN Knowledge Graph Topology (Live Subgraph)</h2>
+              <p class="card-subtitle">Prerequisite DAG message-passing structure directly feeding the Graph Neural Network</p>
+            </div>
+            <span id="graphStatusBadge" class="badge badge-primary">Active DAG Subgraph</span>
+          </div>
+          <div id="graphCanvasContainer" class="graph-canvas-wrapper">
+            <svg id="graphSvg" class="graph-svg" viewBox="0 0 760 260" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="24" refY="3" orient="auto">
+                  <polygon points="0 0, 8 3, 0 6" fill="var(--color-primary)" />
+                </marker>
+              </defs>
+              <g id="graphEdgesGroup"></g>
+              <g id="graphNodesGroup"></g>
+            </svg>
+          </div>
+          <div class="graph-legend-row">
+            <span class="graph-legend-item"><span class="legend-swatch legend-target"></span> Target Concept (Goal)</span>
+            <span class="graph-legend-item"><span class="legend-swatch legend-prereq"></span> Direct Prerequisite</span>
+            <span class="graph-legend-item"><span class="legend-swatch legend-indirect"></span> 2-Hop Foundation</span>
+            <span class="graph-legend-item">&rarr; Directed Prerequisite Edge</span>
+          </div>
+        </div>
+
+        <!-- Counterfactual Impact Rankings Table -->
+        <div class="card section-card-spacing">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Prerequisite Concept Impact Ranking</h3>
+              <p class="card-subtitle">Downstream impact: I_i = M_T^(CF(i)) &minus; M_T^(F)</p>
+            </div>
+            <span class="badge badge-success">Ranked by &Delta; Impact</span>
+          </div>
+
+          <div class="table-responsive-wrapper">
+            <table class="data-table" aria-label="Counterfactual Impact Rankings Table">
+              <thead>
+                <tr>
+                  <th scope="col">Rank</th>
+                  <th scope="col">Prerequisite Concept</th>
+                  <th scope="col">Current Mastery</th>
+                  <th scope="col">Intervened Target</th>
+                  <th scope="col">Estimated Impact (&Delta;)</th>
+                  <th scope="col">Topology Relation</th>
+                </tr>
+              </thead>
+              <tbody id="rankingsTableBody">
+                <tr>
+                  <td colspan="6" class="empty-state-cell">
+                    Select a target concept and click "Run Counterfactual Analysis" to compute impact rankings.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Generated Personalized Learning Path -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Generated Personalized Learning Path</h3>
+              <p class="card-subtitle">Prerequisite-constrained curriculum topologically ordered from foundational to target concept</p>
+            </div>
+            <span id="stepCountBadge" class="badge badge-primary">-- Steps</span>
+          </div>
+
+          <div id="learningPathContainer" class="path-timeline">
+            <div class="empty-state-padded">
+              No learning path active. Execute counterfactual analysis to generate recommended sequence.
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer with Research Compliance Policies -->
+  <footer class="app-footer">
+    <div class="footer-content">
+      <div>
+        <strong>Counterfactual Prerequisite Impact Modeling</strong> &copy; 2026 Academic Engineering Research Prototype.
+      </div>
+      <nav class="footer-links" aria-label="Legal and Research Policies">
+        <button id="openPrivacyBtn" class="footer-link footer-btn-unstyled">Data Governance &amp; Privacy</button>
+        <button id="openTermsBtn" class="footer-link footer-btn-unstyled">Research Use Guidelines</button>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Privacy Policy Modal -->
+  <div id="privacyModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="privacyTitle">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="privacyTitle" class="modal-title">Data Governance &amp; Educational Privacy Policy</h3>
+        <button class="modal-close-btn" data-close="privacyModal" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body-content">
+        <p><strong>1. Dataset Privacy &amp; De-identification:</strong> The research prototype uses anonymized sequence interactions from the open-source XES3G5M dataset. All student identifiers (e.g. <code>uid</code>) are pseudonymous integers devoid of Personally Identifiable Information (PII), biometric identifiers, or institutional affiliations.</p>
+        <p><strong>2. In-Memory Processing:</strong> Student interaction queries submitted through the REST API are evaluated transiently in memory for knowledge-state estimation and are not stored in persistent third-party databases.</p>
+        <p><strong>3. Research Attribution:</strong> The English-translated Knowledge Component metadata is provided solely for academic evaluation and reproducibility under educational open-research standards.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Terms of Service / Guidelines Modal -->
+  <div id="termsModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="termsTitle">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="termsTitle" class="modal-title">Research Use Guidelines &amp; Limitations</h3>
+        <button class="modal-close-btn" data-close="termsModal" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body-content">
+        <p><strong>1. Scope of Utility:</strong> This software is an engineering research prototype designed to evaluate Graph Neural Network message-passing sensitivity under hypothetical state interventions. It is intended for peer review, scientific evaluation, and educational curriculum research.</p>
+        <p><strong>2. Non-Clinical / Non-Diagnostic Warning:</strong> Impact rankings and generated learning paths do not constitute certified psychological or educational clinical assessments. Real classroom deployments require validation by certified educational practitioners.</p>
+        <p><strong>3. Open Science Commitment:</strong> Code, model checkpoints, and deterministic audit reports are provided to ensure full transparency and peer reproducibility.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
