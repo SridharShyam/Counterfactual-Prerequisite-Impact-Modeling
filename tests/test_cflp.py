@@ -1,5 +1,5 @@
 """
-Automated Unit and Integration Test Suite for CFLP.
+Automated Unit and Integration Test Suite for C-PrIM.
 Tests:
 1. Sequence parsing & padding mask validation.
 2. Knowledge state estimation logic.

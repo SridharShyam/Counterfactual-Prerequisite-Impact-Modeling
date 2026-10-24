@@ -1,5 +1,5 @@
 """
-FastAPI application for CFLP:
+FastAPI application for C-PrIM:
 Exposes health, concepts metadata, mastery estimation, factual prediction,
 counterfactual prerequisite impact ranking, and personalized learning path generation.
 """
@@ -129,7 +129,7 @@ def serve_dashboard():
     index_file = static_dir / "index.html"
     if index_file.exists():
         return FileResponse(str(index_file))
-    return {"message": "CFLP Research API online. View /docs for interactive OpenAPI specification."}
+    return {"message": "C-PrIM Research API online. View /docs for interactive OpenAPI specification."}
 
 SERVICES: Dict[str, Any] = {}
 

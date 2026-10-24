@@ -1,4 +1,4 @@
-# CFLP Evidence Package Summary
+# C-PrIM Evidence Package Summary
 
 - **Generated On:** 2026-10-22T05:17:44.561435
 - **Evidence Directory:** `C:\Users\shyam\Downloads\Counterfactual Learning Path\CFLP_Project\reports\evidence_rerun_20261022_050835`

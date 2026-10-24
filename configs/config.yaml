@@ -1,4 +1,4 @@
-# CFLP Research Configuration
+# C-PrIM Research Configuration
 
 data:
   dataset_root: "../XES3G5M"

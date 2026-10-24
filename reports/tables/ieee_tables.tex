@@ -17,15 +17,15 @@
 \textbf{AKT} & 2020 & Ghosh \textit{et al.}, ACM KDD 2020 \cite{ghosh2020context} & Question IDs, Concept IDs, decay representation & 0.820 -- 0.843 & 0.827 -- 0.887 \\
 \textbf{LKT / RoBERTa} & 2023 & Liu \textit{et al.}, NeurIPS 2023 \cite{liu2023xes3g5m} & Question body text, hierarchy routes, PLM & 0.845 -- 0.852 & 0.835 -- 0.850 \\
 \hline
-\textbf{Proposed CFLP GNN} & \textbf{2026} & \textbf{This Work (Empirical Test)} & \textbf{Concept mastery vector + taxonomy DAG adjacency} & \textbf{0.7088} $\pm$ \textbf{0.0085} & \textbf{0.6620} (\textit{BalAcc:} \textbf{0.6575}) \\
+\textbf{Proposed C-PrIM GNN} & \textbf{2026} & \textbf{This Work (Empirical Test)} & \textbf{Concept mastery vector + taxonomy DAG adjacency} & \textbf{0.7088} $\pm$ \textbf{0.0085} & \textbf{0.6620} (\textit{BalAcc:} \textbf{0.6575}) \\
 \hline
-\multicolumn{6}{p{16.5cm}}{\textit{Note:} Standard DLKT baselines evaluate sequential next-question prediction using continuous interaction timestamps, question IDs, and text features. In contrast, CFLP intentionally isolates concept-level mastery profiles to enable counterfactual path intervention without target leakage.}
+\multicolumn{6}{p{16.5cm}}{\textit{Note:} Standard DLKT baselines evaluate sequential next-question prediction using continuous interaction timestamps, question IDs, and text features. In contrast, C-PrIM intentionally isolates concept-level mastery profiles to enable counterfactual path intervention without target leakage.}
 \end{tabular}
 \end{table*}
 
 \begin{table*}[t]
 \centering
-\caption{Table B: Controlled Empirical Benchmark on the Canonical CFLP Test Partition ($N=1,500$)}
+\caption{Table B: Controlled Empirical Benchmark on the Canonical C-PrIM Test Partition ($N=1,500$)}
 \label{tab:local_benchmark}
 \small
 \begin{tabular}{lcccccccc}

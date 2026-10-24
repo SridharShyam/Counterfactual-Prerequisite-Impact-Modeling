@@ -1,5 +1,5 @@
 """
-Comprehensive Reproducible Experiment Rerun & Visualizations Generator (CFLP)
+Comprehensive Reproducible Experiment Rerun & Visualizations Generator (C-PrIM)
 Generates all 10 publication-quality figures, benchmark metrics, literature comparison,
 predictions arrays, counterfactual analysis, and path comparisons in a timestamped evidence directory.
 """
@@ -83,7 +83,7 @@ def run_reproducible_pipeline(evidence_dir_name=None):
         log_file.flush()
 
     log_print("=" * 80)
-    log_print(f"CFLP REPRODUCIBLE EXPERIMENT RERUN & PUBLICATION PACKAGE")
+    log_print(f"C-PrIM REPRODUCIBLE EXPERIMENT RERUN & PUBLICATION PACKAGE")
     log_print(f"Execution Timestamp: {datetime.now().isoformat()}")
     log_print(f"Evidence Directory:  {evidence_dir}")
     log_print("=" * 80)
@@ -455,7 +455,7 @@ def run_reproducible_pipeline(evidence_dir_name=None):
             "Citation_URL": "https://arxiv.org/abs/2305.01524"
         },
         {
-            "Model": "CFLP Proposed GNN (Locally Reproduced)",
+            "Model": "C-PrIM Proposed GNN (Locally Reproduced)",
             "Year": 2026,
             "Paper_Title": "Counterfactual Prerequisite Impact Modeling for Personalized Learning Path Generation",
             "Dataset_Evaluated": "XES3G5M kc_level (Held-out Disjoint 1,500 Test Students)",
@@ -526,7 +526,7 @@ def run_reproducible_pipeline(evidence_dir_name=None):
     path_export_rows = []
     for st in path_res["steps"]:
         path_export_rows.append({
-            "Method": "Proposed CFLP (Topological + Impact-Weighted)",
+            "Method": "Proposed C-PrIM (Topological + Impact-Weighted)",
             "Step_Number": st["step_number"],
             "KC_ID": st["kc_id"],
             "KC_Name": st["kc_name_en"],
@@ -564,7 +564,7 @@ def run_reproducible_pipeline(evidence_dir_name=None):
         fig.savefig(figs_dir / f"{base_name}.pdf")
         plt.close(fig)
 
-    # Fig 1: Overall CFLP Pipeline Diagram
+    # Fig 1: Overall C-PrIM Pipeline Diagram
     fig1, ax = plt.subplots(figsize=(11, 4.5), dpi=300)
     ax.axis("off")
     boxes = [
@@ -586,7 +586,7 @@ def run_reproducible_pipeline(evidence_dir_name=None):
         ax.annotate("", xy=(x_end, 0.50), xytext=(x_start, 0.50),
                     arrowprops=dict(arrowstyle="->", lw=2, color="#475569"))
 
-    ax.set_title("Figure 1: Counterfactual Learning Path (CFLP) System Architecture & Pipeline", fontsize=12, fontweight="bold", pad=12)
+    ax.set_title("Figure 1: Counterfactual Learning Path (C-PrIM) System Architecture & Pipeline", fontsize=12, fontweight="bold", pad=12)
     save_fig(fig1, "fig1_cflp_pipeline_architecture")
 
     # Fig 2: Knowledge Graph Overview
@@ -734,7 +734,7 @@ def run_reproducible_pipeline(evidence_dir_name=None):
     ax10_1.barh([f"Step {r['Step_Number']}: KC {r['KC_ID']}" for _, r in prop_steps.iterrows()][::-1],
                 [r["Current_Mastery"] * 100 for _, r in prop_steps.iterrows()][::-1], color="#4338ca", height=0.45)
     ax10_1.set_xlabel("Initial Mastery (%)", fontweight="bold")
-    ax10_1.set_title("Proposed CFLP Path\n(Topological + Impact Ordering)", fontweight="bold")
+    ax10_1.set_title("Proposed C-PrIM Path\n(Topological + Impact Ordering)", fontweight="bold")
     ax10_1.set_xlim(0, 100)
     ax10_1.grid(axis="x", linestyle="--", alpha=0.5)
 
@@ -753,7 +753,7 @@ def run_reproducible_pipeline(evidence_dir_name=None):
     # 9. Deliverables: Limitations, Test Results, and Evidence Summary
     # -------------------------------------------------------------
     with open(evidence_dir / "limitations_and_failures.md", "w", encoding="utf-8") as lf:
-        lf.write("""# CFLP Experimental Limitations and Research Boundaries
+        lf.write("""# C-PrIM Experimental Limitations and Research Boundaries
 
 1. **Model-Based Simulation vs. Causal Reality:**
    - Counterfactual prerequisite impacts ($I_i = M_T^{(CF(i))} - M_T^{(F)}$) represent hypothetical outputs from the trained neural network.
@@ -765,14 +765,14 @@ def run_reproducible_pipeline(evidence_dir_name=None):
 
 3. **External KT Literature Comparability:**
    - Standard Deep Knowledge Tracing (DKT, AKT, SAKT, GKT) benchmarks on XES3G5M evaluate sequential next-interaction prediction using continuous interaction timestamps and rich question-text embeddings (yielding AUCs ~0.78 to 0.84).
-   - In contrast, CFLP intentionally isolates aggregated concept mastery vectors and curriculum topology to support counterfactual path generation without leaking future question bodies. Thus, CFLP's AUC (0.7088) is evaluated under a different problem formulation and should not be directly equated to sequential question-level text-augmented KT.
+   - In contrast, C-PrIM intentionally isolates aggregated concept mastery vectors and curriculum topology to support counterfactual path generation without leaking future question bodies. Thus, C-PrIM's AUC (0.7088) is evaluated under a different problem formulation and should not be directly equated to sequential question-level text-augmented KT.
 
 4. **Path Divergence vs. Educational Quality:**
    - The 45% divergence rate against Weakest-Mastery-First proves structural and algorithmic difference (preserving prerequisite dependencies), but human learner efficacy remains untested without classroom intervention studies.
 """)
 
     with open(evidence_dir / "evidence_summary.md", "w", encoding="utf-8") as esf:
-        esf.write(f"""# CFLP Evidence Package Summary
+        esf.write(f"""# C-PrIM Evidence Package Summary
 
 - **Generated On:** {datetime.now().isoformat()}
 - **Evidence Directory:** `{evidence_dir}`

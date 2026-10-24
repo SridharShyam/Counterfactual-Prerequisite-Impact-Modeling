@@ -1,6 +1,6 @@
 # Comprehensive UI/UX & System Design Audit (30-Point Framework)
 
-Project: Counterfactual Prerequisite Impact Modeling for Personalized Learning Path Generation (CFLP)
+Project: Counterfactual Prerequisite Impact Modeling for Personalized Learning Path Generation (C-PrIM)
 
 | # | Consideration | Decision | Justification & Architectural Strategy |
 | :---: | :--- | :---: | :--- |

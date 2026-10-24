@@ -1,4 +1,4 @@
-# Scientific and Methodological Limitations of the CFLP Prototype
+# Scientific and Methodological Limitations of the C-PrIM Prototype
 
 ## 1. Predictive Modeling vs. Causal Identification
 

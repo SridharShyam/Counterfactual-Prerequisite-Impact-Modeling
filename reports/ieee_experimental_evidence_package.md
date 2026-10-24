@@ -127,10 +127,10 @@ Table III: Counterfactual Prerequisite Impact Ranking for Target KC 4
 
 ### A. Multi-Student Algorithm Divergence & Quantitative Comparison
 
-To demonstrate that the proposed Counterfactual Learning Path (CFLP) method produces distinct, pedagogically superior remediation sequences rather than mimicking naive heuristics, we evaluated 100 eligible student-target concept pairs across the test set:
+To demonstrate that the proposed Counterfactual Learning Path (C-PrIM) method produces distinct, pedagogically superior remediation sequences rather than mimicking naive heuristics, we evaluated 100 eligible student-target concept pairs across the test set:
 
 - **Divergence Rate:** In **45.0% of evaluated pairs**, the proposed impact-weighted topological path diverged from the weakest-mastery-first baseline.
-- Naive weakest-mastery-first algorithms greedily sequence concepts strictly by historical error rate, risking violation of prerequisite dependencies when intermediate ancestor concepts have higher observed accuracy. In contrast, CFLP enforces directed acyclic graph (DAG) topological ordering weighted by downstream marginal target impact $\hat{I}_i$.
+- Naive weakest-mastery-first algorithms greedily sequence concepts strictly by historical error rate, risking violation of prerequisite dependencies when intermediate ancestor concepts have higher observed accuracy. In contrast, C-PrIM enforces directed acyclic graph (DAG) topological ordering weighted by downstream marginal target impact $\hat{I}_i$.
 
 ### B. Benchmark Case Study: Student `uid=8572`, Target Concept KC 5 (*"Route matching problem"*)
 

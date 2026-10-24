@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "cflp"
 version = "0.1.0"
 description = "Counterfactual Prerequisite Impact Modeling for Personalized Learning Path Generation"
-authors = [{name = "CFLP Research Team"}]
+authors = [{name = "C-PrIM Research Team"}]
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [

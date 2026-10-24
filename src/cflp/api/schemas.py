@@ -1,5 +1,5 @@
 """
-Pydantic Schemas for CFLP REST API.
+Pydantic Schemas for C-PrIM REST API.
 """
 from typing import List, Optional, Dict, Any
 from pydantic import BaseModel, Field

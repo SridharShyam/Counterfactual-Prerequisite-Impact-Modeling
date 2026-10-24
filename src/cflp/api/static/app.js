@@ -1,4 +1,4 @@
-// CFLP Frontend Research Interaction Controller
+// C-PrIM Frontend Research Interaction Controller
 document.addEventListener('DOMContentLoaded', () => {
   // Theme Management
   const themeToggleBtn = document.getElementById('themeToggleBtn');

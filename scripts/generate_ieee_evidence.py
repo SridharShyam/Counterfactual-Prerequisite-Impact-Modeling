@@ -394,7 +394,7 @@ def run_ieee_evidence_pipeline():
                     pass
 
     divergence_pct = round((divergent_paths / eligible_pairs * 100) if eligible_pairs > 0 else 0.0, 2)
-    print(f"Evaluated {eligible_pairs} student-target pairs: Proposed CFLP diverged from Weakest-First in {divergent_paths} cases ({divergence_pct}% divergence rate).")
+    print(f"Evaluated {eligible_pairs} student-target pairs: Proposed C-PrIM diverged from Weakest-First in {divergent_paths} cases ({divergence_pct}% divergence rate).")
 
     # Authoritative Case Study: Student 8572, Target KC 5 ("Route matching problem")
     # Demonstrates clear structural divergence: Proposed path [0, 2, 4, 5] vs Weakest-First [0, 4, 2, 5]
@@ -406,7 +406,7 @@ def run_ieee_evidence_pipeline():
     path_compare_rows = []
     for step in proposed_path_5["steps"]:
         path_compare_rows.append({
-            "Method": "Proposed CFLP (Topological + Impact-Weighted)",
+            "Method": "Proposed C-PrIM (Topological + Impact-Weighted)",
             "Student_ID": test_student["uid"],
             "Target_KC": 5,
             "Target_Name": loader.get_kc_name(5, "en"),

@@ -13,7 +13,7 @@ from cflp.data.loader import DatasetLoader, SequenceParser
 
 def run_dataset_audit():
     print("=" * 65)
-    print("STARTING CFLP REPRODUCIBLE DATASET AUDIT")
+    print("STARTING C-PrIM REPRODUCIBLE DATASET AUDIT")
     print("=" * 65)
 
     root = get_project_root()
@@ -129,7 +129,7 @@ def run_dataset_audit():
         json.dump(audit_summary, f, indent=2)
 
     # Write Markdown report
-    md_content = f"""# CFLP Research Dataset Audit Report
+    md_content = f"""# C-PrIM Research Dataset Audit Report
 
 ## 1. Executive Summary
 - **Dataset:** XES3G5M (Mathematics Online Learning Interaction Dataset)

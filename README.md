@@ -1,8 +1,8 @@
-# Counterfactual Prerequisite Impact Modeling (CPIM)
+# Counterfactual Prerequisite Impact Modeling (C-PrIM)
 
 A research framework for personalized learning path recommendation using knowledge graphs, graph neural networks, and counterfactual impact estimation.
 
-Rather than relying on heuristics alone, CPIM estimates how improving specific prerequisite concepts influences a student's probability of mastering a target concept, then generates a prerequisite-compliant study sequence.
+Rather than relying on heuristics alone, C-PrIM estimates how improving specific prerequisite concepts influences a student's probability of mastering a target concept, then generates a prerequisite-compliant study sequence.
 
 ---
 
