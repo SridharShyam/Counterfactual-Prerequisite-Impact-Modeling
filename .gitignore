@@ -218,3 +218,54 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# =============================================================================
+# Security & Sensitive Configuration (Credentials, Keys, Secrets, Private Envs)
+# =============================================================================
+.env*
+!.env.example
+*.key
+*.pem
+*.crt
+*.cert
+*.pfx
+*.p12
+*.csr
+*.pub
+*secret*
+*credential*
+*token*
+*.id_rsa
+*.id_ecdsa
+*.id_ed25519
+*.database
+*.dump
+*.sql
+*.sqlite3
+*.db
+
+# Local configuration overrides
+*.local
+*.local.json
+*.local.yaml
+*.local.yml
+
+# =============================================================================
+# README Tracking Rule: ONLY root README.md is tracked in Git
+# =============================================================================
+*/**/README.md
+*/**/README
+*/**/readme.md
+
+# =============================================================================
+# Generated Artifacts, Heavy Predictions & Result/Output Run Folders
+# =============================================================================
+reports/evidence_rerun_*/
+reports/reports_output_sync/
+*.npz
+*.pt
+*.pth
+*.ckpt
+*.h5
+artifacts/checkpoints/
+artifacts/predictions/
