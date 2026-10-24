@@ -19,7 +19,7 @@ Rather than relying on heuristics alone, C-PrIM estimates how improving specific
 
 ## Repository Structure
 
-```
+```text
 CFLP_Project/
 ├── configs/
 │   └── config.yaml             # Dataset paths and model hyperparameters
