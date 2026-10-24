@@ -1,0 +1,9 @@
+Method,Step_Number,KC_ID,KC_Name,Current_Mastery,Estimated_Target_Impact,Is_Target,Rationale
+Proposed CFLP (Topological + Impact-Weighted),1,0,Other types in the multiplication principle,0.5,0.0163,False,Prerequisite Concept: Current mastery is 50.0%. Improves target probability by +1.6%.
+Proposed CFLP (Topological + Impact-Weighted),2,2,Item matching,0.628,0.0064,False,Prerequisite Concept: Current mastery is 62.8%. Improves target probability by +0.6%.
+Proposed CFLP (Topological + Impact-Weighted),3,4,Object quantity combination,0.5,0.0133,False,Prerequisite Concept: Current mastery is 50.0%. Improves target probability by +1.3%.
+Proposed CFLP (Topological + Impact-Weighted),4,5,Route matching problem,0.6315,0.0,True,Target Concept: Goal of the personalized learning progression.
+Weakest-Mastery-First (Heuristic Baseline),1,0,Other types in the multiplication principle,0.5,0.0163,False,Heuristic selection based solely on lowest historical accuracy without DAG constraint checking.
+Weakest-Mastery-First (Heuristic Baseline),2,4,Object quantity combination,0.5,0.0133,False,Heuristic selection based solely on lowest historical accuracy without DAG constraint checking.
+Weakest-Mastery-First (Heuristic Baseline),3,2,Item matching,0.628,0.0064,False,Heuristic selection based solely on lowest historical accuracy without DAG constraint checking.
+Weakest-Mastery-First (Heuristic Baseline),4,5,Route matching problem,0.6315,0.0,True,Heuristic selection based solely on lowest historical accuracy without DAG constraint checking.

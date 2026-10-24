@@ -1,9 +1,9 @@
 Method,Student_ID,Target_KC,Target_Name,Step_Number,KC_ID,Concept_Name,Current_Mastery,Estimated_Target_Impact,Is_Target,Rationale
-Proposed CFLP (Topological + Impact-Weighted),8572,5,Route matching problem,1,0,Other types in the multiplication principle,0.5,0.0033,False,Prerequisite Concept: Current mastery is 50.0%. Improves target probability by +0.3%.
-Proposed CFLP (Topological + Impact-Weighted),8572,5,Route matching problem,2,2,Item matching,0.628,0.0021,False,Prerequisite Concept: Current mastery is 62.8%. Improves target probability by +0.2%.
-Proposed CFLP (Topological + Impact-Weighted),8572,5,Route matching problem,3,4,Object quantity combination,0.5,0.0022,False,Prerequisite Concept: Current mastery is 50.0%. Improves target probability by +0.2%.
+Proposed CFLP (Topological + Impact-Weighted),8572,5,Route matching problem,1,0,Other types in the multiplication principle,0.5,0.016,False,Prerequisite Concept: Current mastery is 50.0%. Improves target probability by +1.6%.
+Proposed CFLP (Topological + Impact-Weighted),8572,5,Route matching problem,2,2,Item matching,0.628,0.0098,False,Prerequisite Concept: Current mastery is 62.8%. Improves target probability by +1.0%.
+Proposed CFLP (Topological + Impact-Weighted),8572,5,Route matching problem,3,4,Object quantity combination,0.5,0.0135,False,Prerequisite Concept: Current mastery is 50.0%. Improves target probability by +1.4%.
 Proposed CFLP (Topological + Impact-Weighted),8572,5,Route matching problem,4,5,Route matching problem,0.6315,0.0,True,Target Concept: Goal of the personalized learning progression.
-Weakest-Mastery-First (Heuristic Baseline),8572,5,Route matching problem,1,0,Other types in the multiplication principle,0.5,0.0033,False,"Heuristic selection based solely on lowest historical accuracy, risking DAG prerequisite violations."
-Weakest-Mastery-First (Heuristic Baseline),8572,5,Route matching problem,2,4,Object quantity combination,0.5,0.0022,False,"Heuristic selection based solely on lowest historical accuracy, risking DAG prerequisite violations."
-Weakest-Mastery-First (Heuristic Baseline),8572,5,Route matching problem,3,2,Item matching,0.628,0.0021,False,"Heuristic selection based solely on lowest historical accuracy, risking DAG prerequisite violations."
+Weakest-Mastery-First (Heuristic Baseline),8572,5,Route matching problem,1,0,Other types in the multiplication principle,0.5,0.016,False,"Heuristic selection based solely on lowest historical accuracy, risking DAG prerequisite violations."
+Weakest-Mastery-First (Heuristic Baseline),8572,5,Route matching problem,2,4,Object quantity combination,0.5,0.0135,False,"Heuristic selection based solely on lowest historical accuracy, risking DAG prerequisite violations."
+Weakest-Mastery-First (Heuristic Baseline),8572,5,Route matching problem,3,2,Item matching,0.628,0.0098,False,"Heuristic selection based solely on lowest historical accuracy, risking DAG prerequisite violations."
 Weakest-Mastery-First (Heuristic Baseline),8572,5,Route matching problem,4,5,Route matching problem,0.6315,0.0,True,"Heuristic selection based solely on lowest historical accuracy, risking DAG prerequisite violations."

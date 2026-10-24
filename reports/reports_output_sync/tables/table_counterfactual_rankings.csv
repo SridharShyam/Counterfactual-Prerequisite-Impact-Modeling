@@ -1,0 +1,4 @@
+Student_UID,Target_KC,Target_Name,Rank,Candidate_KC,Candidate_Name,Current_Mastery,Requested_Intervention,Actual_Intervention,Intervention_Type,Factual_Target_Prediction,Counterfactual_Target_Prediction,Estimated_Impact,Causal_Disclaimer
+8572,5,Route matching problem,1,0,Other types in the multiplication principle,0.5,0.85,0.85,direct_improvement,0.8041,0.8204,0.0163,"Model-based counterfactual estimate under simulated feature intervention, not verified experimental causal effect."
+8572,5,Route matching problem,2,4,Object quantity combination,0.5,0.85,0.85,direct_improvement,0.8041,0.8174,0.0133,"Model-based counterfactual estimate under simulated feature intervention, not verified experimental causal effect."
+8572,5,Route matching problem,3,2,Item matching,0.628,0.85,0.85,direct_improvement,0.8041,0.8105,0.0064,"Model-based counterfactual estimate under simulated feature intervention, not verified experimental causal effect."

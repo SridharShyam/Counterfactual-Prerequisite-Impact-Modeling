@@ -44,11 +44,18 @@ def evaluate_predictions(
     # Positive class balance
     positive_rate = float(np.mean(y_true))
 
+    from sklearn.metrics import balanced_accuracy_score, precision_recall_curve, auc as compute_auc
+    bal_acc = float(balanced_accuracy_score(y_true, y_pred_binary))
+    prec_arr, rec_arr, _ = precision_recall_curve(y_true, y_pred_probs)
+    pr_auc = float(compute_auc(rec_arr, prec_arr))
+
     return {
         "sample_count": int(len(y_true)),
         "positive_class_ratio": round(positive_rate, 4),
         "roc_auc": round(auc, 4),
+        "pr_auc": round(pr_auc, 4),
         "accuracy": round(acc, 4),
+        "balanced_accuracy": round(bal_acc, 4),
         "precision": round(float(p), 4),
         "recall": round(float(r), 4),
         "f1_score": round(float(f1), 4),

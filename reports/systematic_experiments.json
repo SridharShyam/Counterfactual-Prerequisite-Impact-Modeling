@@ -1,0 +1,94 @@
+{
+  "experiment_grid": [
+    {
+      "name": "Original Config (5 Epochs Fixed)",
+      "best_epoch": 5,
+      "val_auc": 0.5999,
+      "val_tau": 0.85,
+      "test_roc_auc": 0.7005,
+      "test_pr_auc": 0.8719,
+      "test_balanced_accuracy": 0.6416,
+      "test_log_loss": 0.4713,
+      "test_brier_score": 0.1492
+    },
+    {
+      "name": "Config A: Early Stopping (max 12 epochs, patience 3)",
+      "best_epoch": 12,
+      "val_auc": 0.6322,
+      "val_tau": 0.85,
+      "test_roc_auc": 0.7085,
+      "test_pr_auc": 0.8787,
+      "test_balanced_accuracy": 0.6618,
+      "test_log_loss": 0.4548,
+      "test_brier_score": 0.1424
+    },
+    {
+      "name": "Config B: Lower LR (lr=0.001, max 12 epochs)",
+      "best_epoch": 12,
+      "val_auc": 0.5956,
+      "val_tau": 0.87,
+      "test_roc_auc": 0.6974,
+      "test_pr_auc": 0.8706,
+      "test_balanced_accuracy": 0.6352,
+      "test_log_loss": 0.4642,
+      "test_brier_score": 0.1458
+    },
+    {
+      "name": "Config C: Higher Capacity (hidden_dim=64, max 12 epochs)",
+      "best_epoch": 12,
+      "val_auc": 0.6371,
+      "val_tau": 0.78,
+      "test_roc_auc": 0.7103,
+      "test_pr_auc": 0.8778,
+      "test_balanced_accuracy": 0.6746,
+      "test_log_loss": 0.4521,
+      "test_brier_score": 0.1423
+    }
+  ],
+  "winning_config": "Config C: Higher Capacity (hidden_dim=64, max 12 epochs)",
+  "multi_seed_runs": [
+    {
+      "seed": 42,
+      "best_epoch": 12,
+      "val_auc": 0.6371,
+      "val_tau": 0.78,
+      "test_roc_auc": 0.7103,
+      "test_pr_auc": 0.8778,
+      "test_balanced_accuracy": 0.6746,
+      "test_log_loss": 0.4521,
+      "test_brier_score": 0.1423
+    },
+    {
+      "seed": 123,
+      "best_epoch": 12,
+      "val_auc": 0.6364,
+      "val_tau": 0.81,
+      "test_roc_auc": 0.7183,
+      "test_pr_auc": 0.8852,
+      "test_balanced_accuracy": 0.6648,
+      "test_log_loss": 0.4562,
+      "test_brier_score": 0.1427
+    },
+    {
+      "seed": 999,
+      "best_epoch": 5,
+      "val_auc": 0.6283,
+      "val_tau": 0.82,
+      "test_roc_auc": 0.6977,
+      "test_pr_auc": 0.8706,
+      "test_balanced_accuracy": 0.6331,
+      "test_log_loss": 0.4587,
+      "test_brier_score": 0.1449
+    }
+  ],
+  "multi_seed_aggregate": {
+    "mean_roc_auc": 0.7088,
+    "std_roc_auc": 0.0085,
+    "mean_pr_auc": 0.8779,
+    "std_pr_auc": 0.006,
+    "mean_balanced_accuracy": 0.6575,
+    "std_balanced_accuracy": 0.0177,
+    "mean_log_loss": 0.4557,
+    "std_log_loss": 0.0027
+  }
+}

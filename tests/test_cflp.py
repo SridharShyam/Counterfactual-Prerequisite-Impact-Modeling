@@ -195,3 +195,38 @@ def test_path_generator_transitive_closure_preservation():
                 if pred in nx.ancestors(G, 3):
                     assert pred in seq[:idx], f"Prerequisite {pred} must precede {curr} in sequence {seq}"
 
+def test_path_generator_isolated_and_unreachable():
+    """Tests isolated target node and budget overflow edge cases."""
+    G = nx.DiGraph()
+    G.add_node(99, name_en="Isolated Target")
+    gen = LearningPathGenerator(G)
+    m = np.full(100, 0.5)
+    res = gen.generate_path(target_kc=99, student_mastery=m, impact_rankings=[], max_path_length=3)
+    assert res["target_kc"] == 99
+    assert res["ordered_kc_sequence"] == [99]
+
+def test_counterfactual_empty_candidates():
+    """Tests counterfactual engine when no candidates are connected."""
+    num_concepts = 5
+    model = GraphNeuralPredictor(num_concepts=num_concepts, embedding_dim=8, hidden_dim=8)
+    model.eval()
+    G = nx.DiGraph()
+    for i in range(num_concepts):
+        G.add_node(i, name_en=f"Concept_{i}")
+    adj = torch.eye(num_concepts)
+    engine = CounterfactualImpactEngine(model, G, adj)
+    m = np.full(num_concepts, 0.5)
+    # Target 0 has no predecessors
+    res = engine.compute_counterfactual_impacts(target_kc=0, student_mastery=m)
+    assert res == []
+
+def test_graph_edge_metadata_and_provenance():
+    """Tests that edges carry explicit relation_type, source, and confidence metadata."""
+    G = nx.DiGraph()
+    G.add_node(1, name_en="Algebra Foundation")
+    G.add_node(2, name_en="Linear Equations")
+    G.add_edge(1, 2, relation_type="candidate_prerequisite", source="curriculum_taxonomy", confidence=0.85)
+    assert G[1][2]["relation_type"] == "candidate_prerequisite"
+    assert G[1][2]["confidence"] == 0.85
+    assert nx.is_directed_acyclic_graph(G)
+

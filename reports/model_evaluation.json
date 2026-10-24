@@ -2,68 +2,76 @@
   "dataset": "XES3G5M (Chinese Mathematics Online Learning)",
   "evaluated_test_samples": 1500,
   "positive_class_ratio": 0.7847,
-  "validation_selected_threshold": 0.8392,
+  "validation_selected_threshold": 0.8279,
   "baseline_logistic": {
     "sample_count": 1500,
     "positive_class_ratio": 0.7847,
-    "roc_auc": 0.6238,
-    "accuracy": 0.7887,
-    "precision": 0.8058,
-    "recall": 0.9626,
-    "f1_score": 0.8773,
-    "log_loss": 0.515,
-    "brier_score": 0.1658
+    "roc_auc": 0.7118,
+    "pr_auc": 0.868,
+    "accuracy": 0.8167,
+    "balanced_accuracy": 0.6046,
+    "precision": 0.8226,
+    "recall": 0.9771,
+    "f1_score": 0.8932,
+    "log_loss": 0.4615,
+    "brier_score": 0.1445
   },
   "gnn_default_threshold": {
     "sample_count": 1500,
     "positive_class_ratio": 0.7847,
-    "roc_auc": 0.7014,
-    "accuracy": 0.7847,
-    "precision": 0.7847,
-    "recall": 1.0,
-    "f1_score": 0.8793,
-    "log_loss": 0.4779,
-    "brier_score": 0.153
+    "roc_auc": 0.7128,
+    "pr_auc": 0.8798,
+    "accuracy": 0.8207,
+    "balanced_accuracy": 0.5926,
+    "precision": 0.8175,
+    "recall": 0.9932,
+    "f1_score": 0.8968,
+    "log_loss": 0.4494,
+    "brier_score": 0.1414
   },
   "gnn_calibrated_threshold": {
     "sample_count": 1500,
     "positive_class_ratio": 0.7847,
-    "roc_auc": 0.7014,
-    "accuracy": 0.5847,
-    "precision": 0.8713,
-    "recall": 0.5523,
-    "f1_score": 0.676,
-    "log_loss": 0.4779,
-    "brier_score": 0.153
+    "roc_auc": 0.7128,
+    "pr_auc": 0.8798,
+    "accuracy": 0.662,
+    "balanced_accuracy": 0.6656,
+    "precision": 0.8798,
+    "recall": 0.6593,
+    "f1_score": 0.7538,
+    "log_loss": 0.4494,
+    "brier_score": 0.1414
   },
   "ablation_mlp": {
     "sample_count": 1500,
     "positive_class_ratio": 0.7847,
-    "roc_auc": 0.6917,
-    "accuracy": 0.808,
-    "precision": 0.8047,
-    "recall": 0.9975,
-    "f1_score": 0.8907,
-    "log_loss": 0.4633,
-    "brier_score": 0.1454
+    "roc_auc": 0.6811,
+    "pr_auc": 0.859,
+    "accuracy": 0.8067,
+    "balanced_accuracy": 0.5533,
+    "precision": 0.8031,
+    "recall": 0.9983,
+    "f1_score": 0.8902,
+    "log_loss": 0.4692,
+    "brier_score": 0.1472
   },
   "multi_seed_evaluation": {
     "seed_42": {
-      "roc_auc": 0.7014,
-      "log_loss": 0.4779
+      "roc_auc": 0.7103,
+      "log_loss": 0.4521
     },
     "seed_123": {
-      "roc_auc": 0.6978,
-      "log_loss": 0.4782
+      "roc_auc": 0.7183,
+      "log_loss": 0.4562
     },
     "seed_999": {
-      "roc_auc": 0.6985,
-      "log_loss": 0.4764
+      "roc_auc": 0.6977,
+      "log_loss": 0.4587
     },
-    "mean_auc": 0.6992,
-    "std_auc": 0.0016,
-    "mean_logloss": 0.4775,
-    "std_logloss": 0.0008
+    "mean_auc": 0.7088,
+    "std_auc": 0.0085,
+    "mean_logloss": 0.4557,
+    "std_logloss": 0.0027
   },
   "learning_path_divergence": {
     "evaluated_pairs": 100,
@@ -83,5 +91,5 @@
       5
     ]
   },
-  "inference_latency_ms": 1.48
+  "inference_latency_ms": 3.08
 }

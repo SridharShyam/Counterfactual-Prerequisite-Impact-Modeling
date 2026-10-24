@@ -67,20 +67,27 @@ class KCGraphBuilder:
                         cid = leaf_to_id[leaf]
                         parent_to_leaves.setdefault(parent, []).append(cid)
 
-        # Deduplicate parent leaves
+        # Deduplicate parent leaves and track co-occurrence support
+        pair_counts: Dict[Tuple[int, int], int] = {}
         for parent, leaves in parent_to_leaves.items():
             unique_leaves = sorted(list(set(leaves)))
-            # Connect within subtopic cluster as candidate prerequisite/co-requisite directed relations
             for i in range(len(unique_leaves)):
                 for j in range(i + 1, min(i + 4, len(unique_leaves))):
-                    u, v = unique_leaves[i], unique_leaves[j]
-                    self.graph.add_edge(
-                        u, v,
-                        relation_type="hierarchy_cluster",
-                        source="taxonomy",
-                        weight=1.0,
-                        confidence=0.75
-                    )
+                    pair = (unique_leaves[i], unique_leaves[j])
+                    pair_counts[pair] = pair_counts.get(pair, 0) + 1
+
+        for (u, v), count in pair_counts.items():
+            # Confidence based on cluster recurrence across syllabus items
+            conf = min(1.0, 0.50 + 0.10 * count)
+            if conf >= confidence_threshold:
+                self.graph.add_edge(
+                    u, v,
+                    relation_type="candidate_prerequisite",
+                    source="curriculum_taxonomy",
+                    weight=1.0,
+                    support_count=count,
+                    confidence=conf
+                )
 
         # Ensure DAG properties for learning path progression by breaking any accidental cycles
         if not nx.is_directed_acyclic_graph(self.graph):
