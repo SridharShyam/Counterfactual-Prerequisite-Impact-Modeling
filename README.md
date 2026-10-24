@@ -23,6 +23,9 @@ Rather than relying on heuristics alone, C-PrIM estimates how improving specific
 CFLP_Project/
 ├── configs/
 │   └── config.yaml             # Dataset paths and model hyperparameters
+├── notebooks/                  # Interactive exploratory analysis notebooks
+│   ├── 01_dataset_exploration.ipynb
+│   └── 02_interaction_insights.ipynb
 ├── src/
 │   └── cflp/
 │       ├── api/                # FastAPI service, endpoints, and dashboard
