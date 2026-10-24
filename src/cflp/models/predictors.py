@@ -1,5 +1,10 @@
 """
-Student Knowledge-State Estimator and Predictive Models (Baseline & Graph-based).
+Student Knowledge-State Estimation and Predictive Models.
+
+Includes:
+1. KnowledgeStateEstimator: Recency-weighted mastery profiling with Bayesian smoothing.
+2. BaselineLogisticPredictor: Linear baseline using mastery summaries and item bias.
+3. GraphNeuralPredictor: Graph neural network propagating mastery signals along prerequisite edges.
 """
 import math
 from typing import Dict, List, Optional, Tuple, Any
@@ -10,9 +15,10 @@ import torch.nn.functional as F
 
 class KnowledgeStateEstimator:
     """
-    Estimates student mastery vector across all Knowledge Components
-    using exponentially decayed recency-weighted accuracy and Bayesian priors.
-    Maintains values bounded in [0, 1].
+    Estimates student mastery across all knowledge components.
+    
+    Weights recent attempts more heavily via exponential decay and applies
+    Bayesian smoothing so sparse interaction histories remain well-behaved in [0, 1].
     """
 
     def __init__(self, num_concepts: int = 1175, prior_mastery: float = 0.5, decay_rate: float = 0.95):
@@ -27,8 +33,10 @@ class KnowledgeStateEstimator:
         target_kc: Optional[int] = None
     ) -> np.ndarray:
         """
-        Computes the mastery profile vector (size: num_concepts) for a single student.
-        Uses historical interactions strictly prior to any evaluation point.
+        Computes a mastery vector for a single student.
+        
+        Only uses interactions occurring strictly prior to the evaluation point
+        to prevent future data leakage.
         """
         mastery = np.full(self.num_concepts, self.prior_mastery, dtype=np.float32)
         counts = np.zeros(self.num_concepts, dtype=np.int32)
@@ -40,7 +48,7 @@ class KnowledgeStateEstimator:
             c = concept_sequence[i]
             r = response_sequence[i]
             if 0 <= c < self.num_concepts and (r == 0 or r == 1):
-                # Recency weighting: more recent interactions carry greater weight
+                # More recent practice attempts get higher weight
                 recency_weight = math.pow(self.decay_rate, n - 1 - i)
                 weighted_success[c] += r * recency_weight
                 weight_sum[c] += recency_weight
@@ -48,21 +56,23 @@ class KnowledgeStateEstimator:
 
         for c in range(self.num_concepts):
             if counts[c] > 0:
-                # Bayesian smoothed empirical estimate: (sum_w + prior*2) / (w_sum + 2)
+                # Bayesian smoothing: blends observed success rate with the 0.5 prior
                 mastery[c] = (weighted_success[c] + self.prior_mastery * 2.0) / (weight_sum[c] + 2.0)
 
         return mastery
 
 class BaselineLogisticPredictor(nn.Module):
     """
-    Interpretable baseline logistic regression model predicting future response correctness
-    from student target mastery, candidate prerequisite average mastery, and KC difficulty.
+    Logistic regression baseline for predicting target concept success.
+    
+    Uses three features (target mastery, average prerequisite mastery, and practice history length)
+    combined with a learned per-concept difficulty bias.
     """
 
     def __init__(self, num_concepts: int = 1175):
         super().__init__()
         self.num_concepts = num_concepts
-        # KC difficulty / bias embedding
+        # Learned concept difficulty parameter (bias term)
         self.kc_bias = nn.Embedding(num_concepts, 1)
         # Weights for [target_mastery, prereq_mean_mastery, total_attempts]
         self.linear = nn.Linear(3, 1)
@@ -74,7 +84,7 @@ class BaselineLogisticPredictor(nn.Module):
         prereq_mastery: torch.Tensor,
         history_len: torch.Tensor
     ) -> torch.Tensor:
-        """Outputs predicted probability of correct response on target_kc."""
+        """Predicts probability of a correct response on target_kc."""
         bias = self.kc_bias(target_kc).squeeze(-1) # (B,)
         features = torch.stack([target_mastery, prereq_mastery, history_len], dim=-1) # (B, 3)
         logit = self.linear(features).squeeze(-1) + bias
@@ -82,9 +92,10 @@ class BaselineLogisticPredictor(nn.Module):
 
 class GraphNeuralPredictor(nn.Module):
     """
-    Graph Neural Network model that propagates concept mastery along prerequisite graph edges
-    to predict target concept performance.
-    Implemented in pure PyTorch (sparse adjacency propagation) for guaranteed cross-platform CPU compatibility.
+    Graph Neural Network that propagates concept mastery across prerequisite edges.
+    
+    Uses standard sparse/dense matrix multiplications in PyTorch to ensure
+    dependable execution on CPU without extra external graph library dependencies.
     """
 
     def __init__(
@@ -97,7 +108,7 @@ class GraphNeuralPredictor(nn.Module):
         super().__init__()
         self.num_concepts = num_concepts
         self.kc_embeddings = nn.Embedding(num_concepts, embedding_dim)
-        # Projects [mastery_val (1) + kc_emb] -> hidden_dim
+        # Combines scalar mastery value with learned concept embedding
         self.input_proj = nn.Linear(1 + embedding_dim, hidden_dim)
 
         # Graph propagation layers (GCN-style message passing on normalized adjacency)

@@ -1,8 +1,9 @@
 """
-Counterfactual Impact Modeling Engine:
-Simulates hypothetical interventions on candidate prerequisite knowledge states
-and computes the model-based counterfactual downstream impact toward a target concept:
-    I_i = M_T^(CF(i)) - M_T^(F)
+Counterfactual Impact Engine
+
+Simulates hypothetical mastery improvements on prerequisite knowledge components
+and estimates downstream impact on target concept success:
+    I_i = M_target(CF_i) - M_target(factual)
 """
 from typing import Dict, List, Optional, Tuple, Any
 import numpy as np
@@ -10,10 +11,7 @@ import torch
 import networkx as nx
 
 class CounterfactualImpactEngine:
-    """
-    Evaluates model-based counterfactual prerequisite impact.
-    Performs controlled feature interventions without retraining the model.
-    """
+    """Estimates how target concept performance changes when prerequisite mastery improves."""
 
     def __init__(
         self,
@@ -37,14 +35,13 @@ class CounterfactualImpactEngine:
         weakness_threshold: float = 0.8
     ) -> List[Dict[str, Any]]:
         """
-        Selects candidate prerequisite concepts connected to target_kc.
-        Prioritizes concepts with lower current mastery.
+        Finds candidate prerequisites for a target concept, prioritizing weaker concepts
+        where remediation can provide the most benefit.
         """
-        # In-neighbors in the prerequisite graph
         if not self.graph.has_node(target_kc):
             return []
 
-        # Find direct and 2-hop predecessors
+        # Look at both immediate and two-step prerequisites in the graph
         predecessors = set(self.graph.predecessors(target_kc))
         two_hop = set()
         for p in predecessors:
@@ -77,11 +74,10 @@ class CounterfactualImpactEngine:
         enforce_improvement: bool = True
     ) -> List[Dict[str, Any]]:
         """
-        Calculates I_i = M_T^(CF(i)) - M_T^(F) for each candidate prerequisite.
-        When enforce_improvement=True (default), verifies target_val > current_mastery.
-        If current_mastery >= 1.0, records intervention_type as 'at_ceiling' (no improvement possible).
-        If intervention_level <= current_mastery, records actual intervention value applied or
-        adjusts to min(1.0, current_m + 0.10) while recording both requested and actual levels.
+        Calculates counterfactual impact (I_i = CF - Factual) for each candidate prerequisite.
+        
+        When enforce_improvement is True, ensures the simulated intervention actually represents
+        a skill boost above the student's current mastery rather than an artificial reduction.
         """
         if candidates is None:
             cand_records = self.select_candidates(target_kc, student_mastery)
@@ -101,7 +97,7 @@ class CounterfactualImpactEngine:
         if not candidate_ids:
             return []
 
-        # 1. Factual prediction M_T^(F)
+        # 1. Evaluate baseline (factual) probability without any intervention
         with torch.no_grad():
             m_factual_t = torch.tensor(student_mastery, dtype=torch.float32, device=self.device).unsqueeze(0)
             target_t = torch.tensor([target_kc], dtype=torch.long, device=self.device)
@@ -109,7 +105,7 @@ class CounterfactualImpactEngine:
 
             factual_score = float(self.model(m_factual_t, target_t, adj).item())
 
-            # 2. Batch Counterfactual predictions M_T^(CF(i))
+            # 2. Evaluate counterfactual scenarios in a single batch for efficiency
             B = len(candidate_ids)
             m_batch = np.tile(student_mastery, (B, 1))
             actual_interventions = []
@@ -120,11 +116,11 @@ class CounterfactualImpactEngine:
                 target_val = float(intervention_level)
 
                 if current_m >= 1.0:
-                    # Concept is already at maximum ceiling
+                    # Student has already achieved complete mastery on this concept
                     target_val = 1.0
                     itype = "at_ceiling"
                 elif enforce_improvement and target_val <= current_m:
-                    # Requested level does not exceed current mastery; clamp strictly above
+                    # When requested level is below current mastery, apply a positive delta instead
                     target_val = min(1.0, current_m + 0.10)
                     itype = "adjusted_improvement" if target_val > current_m else "at_ceiling"
                 else:

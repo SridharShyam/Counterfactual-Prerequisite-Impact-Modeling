@@ -45,8 +45,7 @@ async def lifespan(app: FastAPI):
     # Diagnostic check: verify whether external dataset metadata exists
     if not ds_root.exists() or not (ds_root / "metadata").exists():
         logger.warning(
-            f"[API Startup Alert] Configured dataset path '{ds_root}' or metadata directory not found. "
-            "Initializing synthetic test mode with mock concept fixtures."
+            f"Dataset directory '{ds_root}' not found. Starting API with synthetic test fixtures."
         )
         loader = None
         graph = nx.DiGraph()
@@ -55,7 +54,7 @@ async def lifespan(app: FastAPI):
         graph.add_edge(0, 2)
         graph.add_edge(1, 2)
     else:
-        logger.info(f"[API Startup] Found dataset root at {ds_root}. Building graph from metadata...")
+        logger.info(f"Loading dataset from {ds_root} and building prerequisite graph...")
         loader = DatasetLoader(str(ds_root))
         builder = KCGraphBuilder(str(ds_root / "metadata"))
         graph = builder.build_graph()
@@ -66,7 +65,7 @@ async def lifespan(app: FastAPI):
     gnn_safetensors = artifacts_dir / "gnn_model.safetensors"
 
     if adj_path.exists() and gnn_safetensors.exists() and graph.number_of_nodes() >= 1175:
-        logger.info(f"[API Startup] Loading trained GNN weights from {gnn_safetensors}...")
+        logger.info(f"Loading trained GNN weights from {gnn_safetensors}...")
         adj_np = np.load(adj_path)
         adj_matrix = torch.from_numpy(adj_np).float()
         gnn_model = GraphNeuralPredictor(num_concepts=1175, embedding_dim=32, hidden_dim=32, dropout=0.2)
@@ -75,7 +74,7 @@ async def lifespan(app: FastAPI):
         gnn_model.eval()
         cf_engine = CounterfactualImpactEngine(gnn_model, graph, adj_matrix)
     else:
-        logger.warning("[API Startup Alert] Pre-trained weights or adjacency matrix missing or in mock mode. Initializing fallback GNN.")
+        logger.warning("Pre-trained model checkpoint or adjacency matrix not found in artifacts/. Using uninitialized fallback GNN.")
         n_c = max(10, graph.number_of_nodes())
         gnn_model = GraphNeuralPredictor(num_concepts=n_c, embedding_dim=16, hidden_dim=16, dropout=0.0)
         gnn_model.eval()
@@ -347,7 +346,7 @@ def counterfactual_rank(req: CounterfactualRankRequest):
         intervention_level=req.intervention_level,
         factual_target_prediction=factual_pred,
         rankings=items,
-        scientific_disclaimer="Model-based counterfactual estimate under simulated feature intervention, not verified experimental causal effect."
+        scientific_disclaimer="Model-based counterfactual estimate under simulated feature intervention; reflects model sensitivity rather than a clinical educational trial result."
     )
 
 @app.post("/learning-path/generate", response_model=LearningPathResponse)

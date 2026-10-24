@@ -1,16 +1,15 @@
 """
-Personalized Learning Path Generator:
-Synthesizes topological prerequisite constraints with counterfactual impact scores
-and current student mastery to construct an ordered, actionable learning curriculum.
+Personalized Learning Path Generator
+
+Combines curriculum prerequisite constraints with counterfactual impact estimates
+and current student mastery to construct an ordered, actionable study path.
 """
 from typing import Dict, List, Optional, Tuple, Any
 import networkx as nx
 import numpy as np
 
 class LearningPathGenerator:
-    """
-    Generates pedagogically ordered, prerequisite-constrained learning sequences.
-    """
+    """Builds prerequisite-respecting study sequences tailored to a student's weaknesses."""
 
     def __init__(self, graph: nx.DiGraph):
         self.graph = graph
@@ -24,23 +23,24 @@ class LearningPathGenerator:
         max_path_length: int = 5
     ) -> Dict[str, Any]:
         """
-        Constructs learning path toward target_kc:
-        1. Selects weak prerequisite concepts (< mastery_threshold).
-        2. Incorporates high-impact concepts from counterfactual rankings.
-        3. Applies topological sort on the induced subgraph to ensure all prerequisites precede target.
+        Builds a step-by-step learning path toward target_kc.
+        
+        Identifies unmastered prerequisites, ranks them by potential impact,
+        and applies topological sorting so prerequisites are always studied
+        before dependent concepts.
         """
         if not self.graph.has_node(target_kc):
             return {
                 "target_kc": target_kc,
                 "path": [target_kc],
-                "explanation": "Target concept isolated from graph; direct study recommended.",
+                "explanation": "Target concept has no prerequisite links in the graph; direct study recommended.",
                 "steps": []
             }
 
-        # 1. Gather all ancestors in the graph (true topological prerequisites)
+        # 1. Identify all foundational prerequisite concepts (ancestors) in the graph
         ancestors = nx.ancestors(self.graph, target_kc)
 
-        # 2. Score candidate concepts: combine low mastery with high counterfactual impact
+        # 2. Prioritize concepts where the student is struggling and potential impact is highest
         impact_lookup = {item["kc_id"]: item["estimated_impact"] for item in impact_rankings}
 
         candidate_scores = []
@@ -48,7 +48,7 @@ class LearningPathGenerator:
             current_m = float(student_mastery[c])
             impact = impact_lookup.get(c, 0.0)
 
-            # Pedagogical priority: lower mastery + higher positive impact gets higher score
+            # Balance mastery gap (60%) with counterfactual lift (40%)
             priority_score = (1.0 - current_m) * 0.6 + max(0.0, impact) * 0.4
 
             if current_m < mastery_threshold or impact > 0.01:
