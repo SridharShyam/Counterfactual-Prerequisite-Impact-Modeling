@@ -3,6 +3,7 @@ FastAPI application for C-PrIM:
 Exposes health, concepts metadata, mastery estimation, factual prediction,
 counterfactual prerequisite impact ranking, and personalized learning path generation.
 """
+import os
 from pathlib import Path
 from typing import Dict, List, Any
 import numpy as np
@@ -101,12 +102,17 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-ALLOWED_ORIGINS = [
-    "http://127.0.0.1:8000",
-    "http://localhost:8000",
-    "http://127.0.0.1:3000",
-    "http://localhost:3000",
-]
+# Configurable allowed origins via environment variable with local fallbacks
+env_origins = os.getenv("CFLP_ALLOWED_ORIGINS")
+if env_origins:
+    ALLOWED_ORIGINS = [orig.strip() for orig in env_origins.split(",") if orig.strip()]
+else:
+    ALLOWED_ORIGINS = [
+        "http://127.0.0.1:8000",
+        "http://localhost:8000",
+        "http://127.0.0.1:3000",
+        "http://localhost:3000",
+    ]
 
 app.add_middleware(
     CORSMiddleware,

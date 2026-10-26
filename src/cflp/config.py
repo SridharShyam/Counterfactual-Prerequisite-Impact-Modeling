@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 from typing import Any, Dict
 import yaml
+from dotenv import load_dotenv
 
 # Set OpenMP environment variable defensively
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
@@ -11,8 +12,18 @@ def get_project_root() -> Path:
     return Path(__file__).resolve().parent.parent.parent
 
 def load_config(config_path: str = None) -> Dict[str, Any]:
-    """Loads YAML configuration with relative paths resolved to absolute paths."""
+    """
+    Loads YAML configuration with relative paths resolved to absolute paths.
+    Automatically loads environment variables from .env and applies overrides
+    for server ports, hostnames, dataset locations, and environment settings.
+    """
     root = get_project_root()
+    env_file = root / ".env"
+    if env_file.exists():
+        load_dotenv(dotenv_path=env_file)
+    else:
+        load_dotenv()
+
     if config_path is None:
         config_path = root / "configs" / "config.yaml"
     else:
@@ -25,6 +36,11 @@ def load_config(config_path: str = None) -> Dict[str, Any]:
 
     with open(config_path, "r", encoding="utf-8") as f:
         cfg = yaml.safe_load(f)
+
+    # Allow environment variables to override sensitive or environment-specific paths
+    env_dataset_root = os.getenv("CFLP_DATA_DIR")
+    if env_dataset_root:
+        cfg["data"]["dataset_root"] = env_dataset_root
 
     # Resolve data paths relative to project root or dataset root
     ds_root = Path(cfg["data"]["dataset_root"])
