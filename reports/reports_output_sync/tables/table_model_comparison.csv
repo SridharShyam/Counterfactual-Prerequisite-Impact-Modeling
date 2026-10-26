@@ -1,5 +1,0 @@
-Model,Threshold,ROC_AUC,PR_AUC,Accuracy,Balanced_Accuracy,Precision,Recall,F1_Score,Log_Loss,Brier_Score,Parameters,Topology_Used
-Proposed GNN (Val-Selected tau*),0.8663,0.7114,0.8784,0.608,0.6491,0.883,0.5769,0.6978,0.458,0.1444,88801,Full Relational Graph (Normalized Adjacency)
-Proposed GNN (Default tau=0.50),0.5,0.7114,0.8784,0.8033,0.5523,0.8029,0.9932,0.888,0.458,0.1444,88801,Full Relational Graph (Normalized Adjacency)
-Ablation: No-Graph MLP,0.5,0.6995,0.8641,0.8073,0.5728,0.8105,0.9847,0.8891,0.4746,0.1457,79489,None (Identity / Isolated Concept Embeddings)
-Baseline: Logistic Regression,0.5,0.7035,0.8655,0.804,0.5572,0.8047,0.9907,0.888,0.4665,0.1465,1179,Partial (Mean Prerequisite Mastery Scalar)
