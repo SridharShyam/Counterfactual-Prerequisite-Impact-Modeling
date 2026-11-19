@@ -253,15 +253,17 @@ __marimo__/
 # =============================================================================
 # README Tracking Rule: ONLY root README.md is tracked in Git
 # =============================================================================
-*/**/README.md
-*/**/README
-*/**/readme.md
+**/README.md
+**/README
+**/readme.md
+!/README.md
 
 # =============================================================================
 # Generated Artifacts, Heavy Predictions & Result/Output Run Folders
 # =============================================================================
 reports/evidence_rerun_*/
 reports/reports_output_sync/
+*.npy
 *.npz
 *.pt
 *.pth
