@@ -66,7 +66,7 @@
   1. In `scripts/run_accuracy_experiments.py` (line 37-46, Config C), validation early stopping with 91 candidate threshold steps ($\text{step}=0.005$) selected the validation-optimal threshold **$\tau^* = 0.78$** for Seed 42, yielding a test Balanced Accuracy of **$0.6746$** (recorded in `reports/systematic_experiments.json`).
   2. In `scripts/generate_ieee_evidence.py` (lines 191-202), fixed 12-epoch training evaluated across a 200-step grid ($\text{step}=0.00225$) selected the validation-optimal threshold **$\tau^* = 0.8279$** (rounded to $0.83$), yielding a test Balanced Accuracy of **$0.6656$** and Accuracy of $0.6620$ (recorded in `reports/model_evaluation.json`).
 - **Conclusion:** Both values are internally consistent within their respective evaluation pipelines. They originate from slightly different validation-selection grid granularities and checkpoint stopping criteria. Neither involves test leakage.
-- **Manuscript Decision:** 
+- **Manuscript Decision:**
   - For the **multi-seed robustness summary**, use the systematic run values: **$0.6575 \pm 0.0177$** (with per-seed values: Seed 42 at $\tau^*=0.78 \to 0.6746$; Seed 123 at $\tau^*=0.81 \to 0.6648$; Seed 999 at $\tau^*=0.82 \to 0.6331$).
   - For the **single canonical evidence pipeline / confusion matrix**, cite the Seed 42 run: $\tau^* = 0.8279 \approx 0.83 \to \text{BalAcc} = 0.6656$, $\text{Precision} = 0.8798$.
 

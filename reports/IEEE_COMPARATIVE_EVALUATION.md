@@ -8,7 +8,7 @@
 
 ## 1. Table A — Published Literature Comparison on XES3G5M
 
-The table below summarizes peer-reviewed, published performance metrics for prominent deep learning-based knowledge tracing (DLKT) models evaluated on the canonical **XES3G5M** benchmark. 
+The table below summarizes peer-reviewed, published performance metrics for prominent deep learning-based knowledge tracing (DLKT) models evaluated on the canonical **XES3G5M** benchmark.
 
 > [!IMPORTANT]
 > **Methodological & Feature Protocol Distinction:**
@@ -27,7 +27,7 @@ The table below summarizes peer-reviewed, published performance metrics for prom
 
 ## 2. Table B — Controlled Local Benchmark on Identical C-PrIM Partition
 
-The table below presents the **locally reproduced, controlled experimental results** executed on the identical, held-out, student-disjoint test partition ($N=1,500$ student sequences) derived from `kc_level/test.csv`. 
+The table below presents the **locally reproduced, controlled experimental results** executed on the identical, held-out, student-disjoint test partition ($N=1,500$ student sequences) derived from `kc_level/test.csv`.
 
 All methods in Table B share:
 1. **Identical Input Features:** Recency-weighted mastery vectors ($\mathbf{m} \in \mathbb{R}^{1175}$) with a uniform Bayesian prior ($\alpha=1, \beta=1$). Zero question-text leakage.

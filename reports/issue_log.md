@@ -31,7 +31,7 @@
 - **File / Component:** `src/cflp/graph/builder.py`, `scripts/train_models.py`, `reports/ieee_experimental_evidence_package.md`
 - **Severity:** **Critical (Methodology)**
 - **Evidence:** Edges connect sibling concepts under shared taxonomy clusters sorted by concept index. These edges represent curricular topic co-occurrence/synergy, not psychometrically validated prerequisite dependencies. Furthermore, `build_normalized_adjacency()` symmetrizes edges for bidirectional neural message diffusion.
-- **Correction:** 
+- **Correction:**
   1. Clearly separated predictive message passing (bidirectional normalized adjacency $\mathbf{\hat{A}}$ for mutual correlation) from curriculum sequencing (strict directed acyclic graph $\mathcal{G}$ for topological prerequisite constraints).
   2. Formally designated the graph as a *Hierarchy-Derived Candidate Prerequisite Graph* and explicitly documented the limitation in the paper.
 - **Verification Level:** **Integration-Tested & Experimentally Verified.**
@@ -42,7 +42,7 @@
 - **File / Component:** `src/cflp/counterfactual/impact.py`, `tests/test_cflp.py`
 - **Severity:** **Critical (Counterfactual Logic)**
 - **Evidence:** `enforce_improvement` was previously `False` by default. When enabled, it could silently adjust intervention levels without recording actual values applied, and could not handle concept mastery at ceiling ($M_i = 1.0$).
-- **Correction:** 
+- **Correction:**
   1. Set `enforce_improvement=True` by default in `compute_counterfactual_impacts()`.
   2. Implemented explicit logging of `requested_intervention_level`, `actual_intervention_level`, and `intervention_type` (`direct_improvement`, `adjusted_improvement`, `at_ceiling`, `skill_reduction`).
   3. Handled boundary cases ($M_i = 1.0$) by categorizing them as `at_ceiling`.
@@ -55,7 +55,7 @@
 - **File / Component:** `src/cflp/paths/generator.py`, `tests/test_cflp.py`
 - **Severity:** **Critical (Path Validity)**
 - **Evidence:** Selecting top $K$ ancestors and taking their induced subgraph could omit required intermediate concepts along a multi-hop branch, creating gaps in the prerequisite chain while claiming topological ordering.
-- **Correction:** 
+- **Correction:**
   1. Implemented transitive prerequisite closure expansion: candidate selection expands to include all necessary intermediate ancestors within the length budget.
   2. Added closure validation checking whether any intermediate predecessors in $\text{Ancestors}(T)$ were omitted, recording `has_complete_prerequisite_closure`, `missing_intermediate_prerequisites`, and `is_reachable_within_length_budget`.
   3. Added unit test `test_path_generator_transitive_closure_preservation()` verifying full chain integrity across multi-hop graphs.
@@ -67,7 +67,7 @@
 - **File / Component:** `scripts/generate_ieee_evidence.py`, `src/cflp/evaluation/metrics.py`, `reports/model_evaluation.md`
 - **Severity:** **Critical (Statistical Evaluation)**
 - **Evidence:** Ground truth is 78.47% positive. GNN output probabilities range from 0.52 to 0.93. An uncalibrated $\tau = 0.50$ produced Recall = 1.000, Precision = 0.7847, and Accuracy = 0.7847.
-- **Correction:** 
+- **Correction:**
   1. Verified that continuous discrimination is genuine: ROC-AUC is **0.7014** (surpassing baseline 0.6238 by +0.0776).
   2. Selected the optimal decision threshold on validation data using balanced accuracy ($\tau = 0.8392$).
   3. At $\tau = 0.8392$ on held-out test data, the model actively discriminates both classes (Precision = 0.8713, correctly isolating 260 true negatives out of 323).
@@ -90,7 +90,7 @@
 - **File / Component:** `artifacts/gnn_model.pt`, `src/cflp/api/main.py`, `scripts/run_experiment.py`
 - **Severity:** **Major (Security & Robustness)**
 - **Evidence:** Pickle deserialization risks arbitrary code execution; API crashed if external dataset path was missing.
-- **Correction:** 
+- **Correction:**
   1. Converted model serialization entirely to HuggingFace `safetensors` (`gnn_model.safetensors`) and NumPy binary format (`normalized_adjacency.npy`).
   2. Implemented graceful synthetic fixture mode and startup diagnostic logging in FastAPI lifespan.
 - **Verification Level:** **Unit & Integration-Tested (`pytest tests/test_api.py`).**

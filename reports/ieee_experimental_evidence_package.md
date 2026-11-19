@@ -43,7 +43,7 @@ A directed Knowledge Component relationship graph $\mathcal{G} = (\mathcal{V}, \
 - **Acyclicity Verification:** Verified as a **Directed Acyclic Graph (DAG)** ($0$ cycles detected), enabling topological sort and prerequisite sequencing.
 - **Graph Density & Degree:** Average in-degree $= 0.904$ (Max in-degree $= 7$).
 - **Weakly Connected Components:** 638 clusters.
-- **Separation of Predictive Adjacency vs. Directed Path Constraints:** 
+- **Separation of Predictive Adjacency vs. Directed Path Constraints:**
   1. For *neural message passing*, a symmetric normalized adjacency $\mathbf{\hat{A}} = \mathbf{\tilde{D}}^{-\frac{1}{2}} (\mathbf{A} + \mathbf{A}^T + \mathbf{I}) \mathbf{\tilde{D}}^{-\frac{1}{2}}$ is utilized, allowing mutual bidirectional information exchange across related concepts.
   2. For *learning path synthesis*, the strict **directed acyclic graph** $\mathcal{G}$ is preserved to enforce that foundational prerequisites precede target concepts.
 
