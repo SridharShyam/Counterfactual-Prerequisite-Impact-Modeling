@@ -1,0 +1,6 @@
+Student_UID,Target_KC,Target_Name,Candidate_KC,Candidate_Name,Current_Mastery,Impact_theta_0.60,Impact_theta_0.75,Impact_theta_0.85_default,Impact_theta_0.95,Ranking_Stability
+8572,4,Object quantity combination,0,Other types in the multiplication principle,0.5,0.004,0.0107,0.0151,0.0199,Rank 1 (Monotonic)
+8572,4,Object quantity combination,2,Item matching,0.628,0.0028,0.0035,0.0065,0.0097,Rank 2 (Monotonic)
+8572,5,Route matching problem,0,Other types in the multiplication principle,0.5,0.004,0.0107,0.0151,0.0199,Rank 1 (Monotonic)
+8572,5,Route matching problem,4,Object quantity combination,0.5,0.0039,0.0098,0.0136,0.0172,Rank 2 (Monotonic)
+8572,5,Route matching problem,2,Item matching,0.628,0.0028,0.0035,0.0065,0.0097,Rank 3 (Monotonic)

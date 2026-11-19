@@ -96,11 +96,11 @@ def run_ieee_evidence_pipeline():
         {"Parameter": "PyTorch Version", "Specification": torch.__version__},
         {"Parameter": "NetworkX Version", "Specification": nx.__version__},
         {"Parameter": "Random Seed", "Specification": "42 (Deterministic)"},
-        {"Parameter": "GNN Embedding Dim", "Specification": "32"},
-        {"Parameter": "GNN Hidden Dim", "Specification": "32"},
+        {"Parameter": "GNN Embedding Dim", "Specification": "64"},
+        {"Parameter": "GNN Hidden Dim", "Specification": "64"},
         {"Parameter": "Optimizer", "Specification": "Adam (lr=0.003, weight_decay=1e-4)"},
         {"Parameter": "Batch Size", "Specification": "64"},
-        {"Parameter": "Training Epochs", "Specification": "5"},
+        {"Parameter": "Training Epochs", "Specification": "12"},
         {"Parameter": "Loss Function", "Specification": "Binary Cross Entropy (BCELoss)"}
     ]
     pd.DataFrame(table_env).to_csv(tables_dir / "table2_experimental_configuration.csv", index=False)
@@ -442,7 +442,7 @@ def run_ieee_evidence_pipeline():
     print("\n[Phase 6] Conducting Rigorous Ablation Experiments & Inference Latency Benchmarking...")
     # Ablation 1: Identity MLP (Zero graph message passing)
     class NoGraphMLP(nn.Module):
-        def __init__(self, num_concepts=1175, embedding_dim=32, hidden_dim=32):
+        def __init__(self, num_concepts=1175, embedding_dim=64, hidden_dim=64):
             super().__init__()
             self.emb = nn.Embedding(num_concepts, embedding_dim)
             self.net = nn.Sequential(
@@ -459,7 +459,7 @@ def run_ieee_evidence_pipeline():
 
     mlp_ablation = NoGraphMLP()
     m_opt = torch.optim.Adam(mlp_ablation.parameters(), lr=0.003)
-    for epoch in range(5):
+    for epoch in range(12):
         mlp_ablation.train()
         for batch in train_loader:
             m_opt.zero_grad()

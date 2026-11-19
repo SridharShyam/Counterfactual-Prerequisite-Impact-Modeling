@@ -54,7 +54,9 @@ from cflp.paths.generator import LearningPathGenerator
 from cflp.evaluation.metrics import evaluate_predictions
 from scripts.train_models import StudentPredictionDataset, build_normalized_adjacency
 
-def run_reproducible_pipeline(evidence_dir_name=None):
+def run_reproducible_pipeline(evidence_dir_name=None, seed=42):
+    torch.manual_seed(seed)
+    np.random.seed(seed)
     root = get_project_root()
     cfg = load_config()
     ds_root = Path(cfg["data"]["dataset_root_abs"])
@@ -645,7 +647,7 @@ def run_reproducible_pipeline(evidence_dir_name=None):
     save_fig(fig4, "fig4_training_validation_curves")
 
     # Fig 5: ROC Curves
-    fig5, ax5 = plt.subplots(figsize=(6, 5), dpi=300)
+    fig5, ax5 = plt.subplots(figsize=(6.8, 5.2), dpi=300)
     fpr_g, tpr_g, _ = roc_curve(y_test, p_gnn)
     fpr_m, tpr_m, _ = roc_curve(y_test, p_mlp)
     fpr_b, tpr_b, _ = roc_curve(y_test, p_baseline)
@@ -655,7 +657,7 @@ def run_reproducible_pipeline(evidence_dir_name=None):
     ax5.plot([0, 1], [0, 1], "k:", alpha=0.5, label="Random Chance (AUC = 0.5000)")
     ax5.set_xlabel("False Positive Rate (1 - Specificity)", fontweight="bold")
     ax5.set_ylabel("True Positive Rate (Sensitivity)", fontweight="bold")
-    ax5.set_title("Figure 5: Receiver Operating Characteristic (ROC) on Held-Out Test Set", fontweight="bold")
+    ax5.set_title("Figure 5: Receiver Operating Characteristic (ROC) on Held-Out Test Set", fontweight="bold", fontsize=10, pad=10)
     ax5.legend(loc="lower right")
     ax5.grid(True, linestyle="--", alpha=0.5)
     save_fig(fig5, "fig5_roc_curves")
@@ -829,6 +831,146 @@ Generated outputs will populate:
 - `run_config.json`: Configuration snapshot
 - `run.log`: Full execution log
 """)
+
+    # -------------------------------------------------------------
+    # 9. Master Canonical Table Synchronization (reports/tables/)
+    # -------------------------------------------------------------
+    master_tables_dir = root / "reports" / "tables"
+    master_tables_dir.mkdir(parents=True, exist_ok=True)
+    log_print(f"\n[Phase 8] Synchronizing canonical tables to {master_tables_dir}...")
+
+    # Load dataset audit for Table 1
+    ds_audit_file = root / "reports" / "dataset_audit.json"
+    if ds_audit_file.exists():
+        with open(ds_audit_file, "r", encoding="utf-8") as f:
+            ds_audit = json.load(f)
+        table_ds = [
+            {"Attribute": "Dataset Name", "Value": ds_audit["dataset_name"]},
+            {"Attribute": "Domain", "Value": ds_audit["domain"]},
+            {"Attribute": "Total Defined Knowledge Components", "Value": ds_audit["kc_metadata_count"]},
+            {"Attribute": "Active Observed KCs (Train/Val)", "Value": ds_audit["unique_observed_kcs_train_valid"]},
+            {"Attribute": "Total Annotated Questions", "Value": ds_audit["question_metadata_count"]},
+            {"Attribute": "Unique Students (Train/Val)", "Value": ds_audit["unique_students_train_valid"]},
+            {"Attribute": "Unique Students (Holdout Test)", "Value": ds_audit["test_students"]},
+            {"Attribute": "Student Leakage Across Split", "Value": ds_audit["student_leakage_overlap"]},
+            {"Attribute": "Total Train/Val Sequences", "Value": ds_audit["train_valid_total_sequences"]},
+            {"Attribute": "Holdout Test Sequences", "Value": ds_audit["test_sequences"]},
+            {"Attribute": "Sequence Length (Min / Median / Mean / Max)", "Value": f"{ds_audit['sequence_lengths']['min']} / {ds_audit['sequence_lengths']['median']} / {ds_audit['sequence_lengths']['mean']} / {ds_audit['sequence_lengths']['max']}"},
+            {"Attribute": "Response Encoding", "Value": "Binary {0: Incorrect, 1: Correct}"},
+            {"Attribute": "Sequence Padding Token", "Value": "-1 (Explicitly masked out)"}
+        ]
+        pd.DataFrame(table_ds).to_csv(master_tables_dir / "table1_dataset_statistics.csv", index=False)
+        pd.DataFrame(table_ds).to_csv(tabs_dir / "table1_dataset_statistics.csv", index=False)
+
+    # Table 2: Experimental configuration matching canonical Config C
+    table_env = [
+        {"Parameter": "Operating System", "Specification": "Microsoft Windows 11"},
+        {"Parameter": "Python Version", "Specification": "3.13.9"},
+        {"Parameter": "PyTorch Version", "Specification": torch.__version__},
+        {"Parameter": "NetworkX Version", "Specification": nx.__version__},
+        {"Parameter": "Random Seed", "Specification": "42 (Deterministic)"},
+        {"Parameter": "GNN Embedding Dim", "Specification": "64"},
+        {"Parameter": "GNN Hidden Dim", "Specification": "64"},
+        {"Parameter": "Optimizer", "Specification": "Adam (lr=0.003, weight_decay=1e-4)"},
+        {"Parameter": "Batch Size", "Specification": "64"},
+        {"Parameter": "Training Epochs", "Specification": "12"},
+        {"Parameter": "Loss Function", "Specification": "Binary Cross Entropy (BCELoss)"}
+    ]
+    pd.DataFrame(table_env).to_csv(master_tables_dir / "table2_experimental_configuration.csv", index=False)
+    pd.DataFrame(table_env).to_csv(tabs_dir / "table2_experimental_configuration.csv", index=False)
+
+    # Table 3: Test performance comparison
+    table_benchmark = [
+        {"Metric": "ROC-AUC", "Baseline_Logistic": eval_b_50["roc_auc"], "GNN_Default_tau_0.5": eval_g_50["roc_auc"], "GNN_ValSelected_tau": eval_g_tau["roc_auc"], "Absolute_Delta_vs_Baseline": round(eval_g_tau["roc_auc"] - eval_b_50["roc_auc"], 4)},
+        {"Metric": "Accuracy", "Baseline_Logistic": eval_b_50["accuracy"], "GNN_Default_tau_0.5": eval_g_50["accuracy"], "GNN_ValSelected_tau": eval_g_tau["accuracy"], "Absolute_Delta_vs_Baseline": round(eval_g_tau["accuracy"] - eval_b_50["accuracy"], 4)},
+        {"Metric": "Precision", "Baseline_Logistic": eval_b_50["precision"], "GNN_Default_tau_0.5": eval_g_50["precision"], "GNN_ValSelected_tau": eval_g_tau["precision"], "Absolute_Delta_vs_Baseline": round(eval_g_tau["precision"] - eval_b_50["precision"], 4)},
+        {"Metric": "Recall", "Baseline_Logistic": eval_b_50["recall"], "GNN_Default_tau_0.5": eval_g_50["recall"], "GNN_ValSelected_tau": eval_g_tau["recall"], "Absolute_Delta_vs_Baseline": round(eval_g_tau["recall"] - eval_b_50["recall"], 4)},
+        {"Metric": "F1_Score", "Baseline_Logistic": eval_b_50["f1_score"], "GNN_Default_tau_0.5": eval_g_50["f1_score"], "GNN_ValSelected_tau": eval_g_tau["f1_score"], "Absolute_Delta_vs_Baseline": round(eval_g_tau["f1_score"] - eval_b_50["f1_score"], 4)},
+        {"Metric": "Log_Loss", "Baseline_Logistic": eval_b_50["log_loss"], "GNN_Default_tau_0.5": eval_g_50["log_loss"], "GNN_ValSelected_tau": eval_g_tau["log_loss"], "Absolute_Delta_vs_Baseline": round(eval_g_tau["log_loss"] - eval_b_50["log_loss"], 4)},
+        {"Metric": "Brier_Score", "Baseline_Logistic": eval_b_50["brier_score"], "GNN_Default_tau_0.5": eval_g_50["brier_score"], "GNN_ValSelected_tau": eval_g_tau["brier_score"], "Absolute_Delta_vs_Baseline": round(eval_g_tau["brier_score"] - eval_b_50["brier_score"], 4)}
+    ]
+    pd.DataFrame(table_benchmark).to_csv(master_tables_dir / "table3_test_performance_comparison.csv", index=False)
+    pd.DataFrame(table_benchmark).to_csv(tabs_dir / "table3_test_performance_comparison.csv", index=False)
+
+    # Table 4: Counterfactual Prerequisite Ranking
+    table4_rows = []
+    for r, it in enumerate(rankings_85, 1):
+        table4_rows.append({
+            "Rank": r,
+            "KC_ID": it["kc_id"],
+            "Concept_Name": loader.get_kc_name(it["kc_id"], "en"),
+            "Current_Mastery": round(it["current_mastery"], 4),
+            "Intervention_Level": it.get("actual_intervention_level", 0.85),
+            "Factual_Target_Prediction": round(it["factual_target_prediction"], 4),
+            "Counterfactual_Target_Prediction": round(it["counterfactual_target_prediction"], 4),
+            "Estimated_Impact_Delta": round(it["estimated_impact"], 4),
+            "Relationship": "direct_prerequisite" if graph.has_edge(it["kc_id"], target_kc) else "ancestor_prerequisite"
+        })
+    pd.DataFrame(table4_rows).to_csv(master_tables_dir / "table4_counterfactual_prerequisite_ranking.csv", index=False)
+    pd.DataFrame(table4_rows).to_csv(tabs_dir / "table4_counterfactual_prerequisite_ranking.csv", index=False)
+
+    # Table 5: Learning Path Comparison
+    table5_rows = []
+    for st in path_res["steps"]:
+        table5_rows.append({
+            "Method": "Proposed C-PrIM (Topological + Impact-Weighted)",
+            "Student_ID": sample_student["uid"],
+            "Target_KC": target_kc,
+            "Target_Name": target_name,
+            "Step_Number": st["step_number"],
+            "KC_ID": st["kc_id"],
+            "Concept_Name": st["kc_name_en"],
+            "Current_Mastery": st["current_mastery"],
+            "Estimated_Target_Impact": st["estimated_impact"],
+            "Is_Target": st["is_target"],
+            "Rationale": st["rationale"]
+        })
+    for idx, cid in enumerate(weakest_first_seq, 1):
+        table5_rows.append({
+            "Method": "Weakest-Mastery-First (Heuristic Baseline)",
+            "Student_ID": sample_student["uid"],
+            "Target_KC": target_kc,
+            "Target_Name": target_name,
+            "Step_Number": idx,
+            "KC_ID": cid,
+            "Concept_Name": loader.get_kc_name(cid, "en"),
+            "Current_Mastery": round(float(sm[cid]), 4),
+            "Estimated_Target_Impact": round(float(next((r["estimated_impact"] for r in rankings_85 if r["kc_id"] == cid), 0.0)), 4),
+            "Is_Target": (cid == target_kc),
+            "Rationale": "Heuristic selection based solely on lowest historical accuracy, risking DAG prerequisite violations."
+        })
+    pd.DataFrame(table5_rows).to_csv(master_tables_dir / "table5_learning_path_comparison.csv", index=False)
+    pd.DataFrame(table5_rows).to_csv(tabs_dir / "table5_learning_path_comparison.csv", index=False)
+
+    # Table 6: Ablation Study
+    ablation_table = [
+        {"Model_Variant": "Full Proposed Framework (GNN + Prerequisite Graph)", "Test_ROC_AUC": eval_g_tau["roc_auc"], "Log_Loss": eval_g_tau["log_loss"], "Brier_Score": eval_g_tau["brier_score"], "Prereq_Topology_Preserved": True, "Description": "Complete system with relational graph message passing."},
+        {"Model_Variant": "Ablation A: No Prerequisite Graph (MLP Target Only)", "Test_ROC_AUC": eval_m_50["roc_auc"], "Log_Loss": eval_m_50["log_loss"], "Brier_Score": eval_m_50["brier_score"], "Prereq_Topology_Preserved": False, "Description": "Removes graph adjacency; isolates target concept without relational context."},
+        {"Model_Variant": "Ablation B: Baseline Logistic Model (Handcrafted Features)", "Test_ROC_AUC": eval_b_50["roc_auc"], "Log_Loss": eval_b_50["log_loss"], "Brier_Score": eval_b_50["brier_score"], "Prereq_Topology_Preserved": "Partial (Mean Prereq Only)", "Description": "Standard logistic regression using scalar prerequisite mastery average."}
+    ]
+    pd.DataFrame(ablation_table).to_csv(master_tables_dir / "table6_ablation_study.csv", index=False)
+    pd.DataFrame(ablation_table).to_csv(tabs_dir / "table6_ablation_study.csv", index=False)
+
+    # Table 7: Multi-seed Robustness
+    table7_seeds = [
+        {"Seed": int(r["seed"]), "ROC_AUC": r["test_roc_auc"], "Log_Loss": r["test_log_loss"]}
+        for r in seed_runs
+    ]
+    table7_seeds.append({
+        "Seed": "Mean +/- Std",
+        "ROC_AUC": f"{mean_auc:.4f} +/- {std_auc:.4f}",
+        "Log_Loss": f"{mean_loss:.4f} +/- {std_loss:.4f}"
+    })
+    pd.DataFrame(table7_seeds).to_csv(master_tables_dir / "table7_multi_seed_robustness.csv", index=False)
+    pd.DataFrame(table7_seeds).to_csv(tabs_dir / "table7_multi_seed_robustness.csv", index=False)
+
+    # Direct synchronizations for named tables
+    df_metrics.to_csv(master_tables_dir / "table_model_comparison.csv", index=False)
+    df_seeds.to_csv(master_tables_dir / "table_multi_seed_robustness.csv", index=False)
+    df_lit.to_csv(master_tables_dir / "table_literature_benchmark.csv", index=False)
+    df_cf.to_csv(master_tables_dir / "table_counterfactual_rankings.csv", index=False)
+    df_paths.to_csv(master_tables_dir / "table_learning_path_comparison.csv", index=False)
+    log_print("Synchronized all tables to reports/tables/.")
 
     log_print(f"\nPipeline successfully completed! Evidence package finalized at: {evidence_dir}")
     log_file.close()

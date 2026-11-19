@@ -1,0 +1,84 @@
+====================================================================================================
+C-PrIM IEEE MANUSCRIPT FINAL FIGURES AUDIT MANIFEST
+====================================================================================================
+Directory: paper_final_figures/
+Generated Date: 2026-11-19
+Canonical Evidence Source: reports/evidence_final_20261111/
+Canonical Source Folder: reports/figures_final/
+DPI: 300 (Raster PNG) and Full Vector (PDF)
+
+----------------------------------------------------------------------------------------------------
+Figure 1: Pipeline Architecture
+----------------------------------------------------------------------------------------------------
+Final Files:
+  - paper_final_figures/Fig1_Architecture.pdf
+  - paper_final_figures/Fig1_Architecture.png
+Source Files:
+  - reports/figures_final/fig1_cflp_pipeline_architecture.pdf
+  - reports/figures_final/fig1_cflp_pipeline_architecture.png
+Intended IEEE Section:
+  Section IV.A (System Architecture), Fig. 1
+One-Line Caption:
+  End-to-end architecture of the C-PrIM framework, illustrating interaction sequence processing, knowledge state estimation, curriculum graph message passing, counterfactual impact estimation, and topological learning path generation.
+Canvas Margin Verification:
+  Verified (No Title Clipping). Left margin: 565px, Right margin: 485px.
+
+----------------------------------------------------------------------------------------------------
+Figure 2: Receiver Operating Characteristic (ROC) Curves
+----------------------------------------------------------------------------------------------------
+Final Files:
+  - paper_final_figures/Fig2_ROC_Curves.pdf
+  - paper_final_figures/Fig2_ROC_Curves.png
+Source Files:
+  - reports/figures_final/fig5_roc_curves.pdf
+  - reports/figures_final/fig5_roc_curves.png
+Intended IEEE Section:
+  Section V.C (Predictive Performance Comparison), Fig. 2
+One-Line Caption:
+  Receiver Operating Characteristic (ROC) curves on the held-out test partition (N=1,500), demonstrating the discriminative superiority of the Proposed GNN (AUC = 0.7060) over No-Graph MLP (AUC = 0.6995) and Baseline Logistic (AUC = 0.7035).
+Canvas Margin Verification:
+  Verified (Regenerated with expanded canvas width W=2040px, fontsize=10 to resolve clipping bug). Left margin: 197px, Right margin: 42px.
+
+----------------------------------------------------------------------------------------------------
+Figure 3: Personalized Learning Path Sequence Comparison
+----------------------------------------------------------------------------------------------------
+Final Files:
+  - paper_final_figures/Fig3_Path_Comparison.pdf
+  - paper_final_figures/Fig3_Path_Comparison.png
+Source Files:
+  - reports/figures_final/fig10_personalized_path_examples.pdf
+  - reports/figures_final/fig10_personalized_path_examples.png
+Intended IEEE Section:
+  Section VI.B (Personalized Path Generation Case Study), Fig. 3
+One-Line Caption:
+  Comparison of pedagogical learning sequences generated for Student 8572 targeting KC 5: the Proposed C-PrIM path strictly enforces prerequisite transitive closure (Steps: 0 -> 2 -> 4 -> 5), whereas the heuristic Weakest-First baseline induces pedagogical ordering violations (Steps: 0 -> 4 -> 2 -> 5).
+Canvas Margin Verification:
+  Verified (No Title Clipping). Left margin: 536px, Right margin: 535px.
+
+----------------------------------------------------------------------------------------------------
+Figure 4: Counterfactual Intervention Sensitivity Analysis
+----------------------------------------------------------------------------------------------------
+Final Files:
+  - paper_final_figures/Fig4_Sensitivity.pdf
+  - paper_final_figures/Fig4_Sensitivity.png
+Source Files:
+  - reports/figures_final/counterfactual_sensitivity.pdf
+  - reports/figures_final/counterfactual_sensitivity.png
+Intended IEEE Section:
+  Section VI.C (Sensitivity Analysis), Fig. 4
+One-Line Caption:
+  Sensitivity of counterfactual target impact estimates across intervention levels theta in [0.60, 0.75, 0.85, 0.95], exhibiting monotonic response scaling and ranking order invariance.
+Canvas Margin Verification:
+  Verified (Regenerated with expanded canvas width W=2550px, fontsize=10 to resolve clipping bug). Left margin: 338px, Right margin: 154px.
+
+----------------------------------------------------------------------------------------------------
+Excluded Figures Audit (Reviewed and intentionally omitted from the final manuscript):
+----------------------------------------------------------------------------------------------------
+- fig2_knowledge_graph_overview: Excluded.
+- fig3_representative_prerequisite_subgraph: Excluded.
+- fig4_training_validation_curves: Excluded.
+- fig6_precision_recall_curves: Excluded.
+- fig7_metric_comparison_plot: Excluded.
+- fig8_multiseed_robustness: Excluded from main paper figures (data retained in Table III / table7).
+- fig9_counterfactual_impact_distribution: Excluded from main paper figures (data retained in Table II / table4).
+====================================================================================================

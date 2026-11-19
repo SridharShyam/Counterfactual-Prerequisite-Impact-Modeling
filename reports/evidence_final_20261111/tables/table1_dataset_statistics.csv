@@ -1,0 +1,14 @@
+Attribute,Value
+Dataset Name,XES3G5M (Chinese Mathematics Online Learning)
+Domain,Mathematics
+Total Defined Knowledge Components,1175
+Active Observed KCs (Train/Val),865
+Total Annotated Questions,7652
+Unique Students (Train/Val),14453
+Unique Students (Holdout Test),3613
+Student Leakage Across Split,0
+Total Train/Val Sequences,33397
+Holdout Test Sequences,3613
+Sequence Length (Min / Median / Mean / Max),3 / 200.0 / 153.88 / 200
+Response Encoding,"Binary {0: Incorrect, 1: Correct}"
+Sequence Padding Token,-1 (Explicitly masked out)

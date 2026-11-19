@@ -1,0 +1,21 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-8.4.2, pluggy-1.5.0 -- C:\Users\shyam\anaconda3\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\shyam\Downloads\Counterfactual Learning Path\CFLP_Project
+configfile: pyproject.toml
+plugins: anyio-4.10.0, langsmith-0.14.8
+collecting ... collected 11 items
+
+CFLP_Project\tests\test_api.py::test_api_workflow PASSED                 [  9%]
+CFLP_Project\tests\test_cflp.py::test_sequence_parser_and_padding_mask PASSED [ 18%]
+CFLP_Project\tests\test_cflp.py::test_compound_concept_parsing PASSED    [ 27%]
+CFLP_Project\tests\test_cflp.py::test_knowledge_state_estimator PASSED   [ 36%]
+CFLP_Project\tests\test_cflp.py::test_graph_dag_and_path_generation PASSED [ 45%]
+CFLP_Project\tests\test_cflp.py::test_counterfactual_engine_synthetic_smoke PASSED [ 54%]
+CFLP_Project\tests\test_cflp.py::test_counterfactual_boundary_and_improvement_enforcement PASSED [ 63%]
+CFLP_Project\tests\test_cflp.py::test_path_generator_transitive_closure_preservation PASSED [ 72%]
+CFLP_Project\tests\test_cflp.py::test_path_generator_isolated_and_unreachable PASSED [ 81%]
+CFLP_Project\tests\test_cflp.py::test_counterfactual_empty_candidates PASSED [ 90%]
+CFLP_Project\tests\test_cflp.py::test_graph_edge_metadata_and_provenance PASSED [100%]
+
+============================= 11 passed in 13.64s =============================

@@ -1,0 +1,8 @@
+os: win32
+python_version: 3.11.5 (tags/v3.11.5:cce6ba9, Aug 24 2023, 14:38:34) [MSC v.1936 64 bit (AMD64)]
+torch_version: 2.0.0+cpu
+numpy_version: 1.26.4
+networkx_version: 3.3
+pandas_version: 2.2.1
+matplotlib_version: 3.8.2
+cuda_available: False

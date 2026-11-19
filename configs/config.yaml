@@ -25,9 +25,9 @@ model:
   hidden_dim: 64
   gnn_layers: 2
   dropout: 0.2
-  learning_rate: 0.001
-  batch_size: 128
-  epochs: 5
+  learning_rate: 0.003
+  batch_size: 64
+  epochs: 12
   patience: 3
   device: "cpu" # Auto-detects cuda if available
   baseline_checkpoint: "artifacts/baseline_model.pt"

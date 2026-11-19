@@ -94,15 +94,18 @@ $$\text{Curriculum Step 1: } \text{KC 0 } (M=50.0\%, \Delta=+0.49\%) \longrighta
 ## 5. Sensitivity Analysis Across Intervention Intensities
 
 ```text
-Table 3: Sensitivity of predicted target impact across intervention levels (theta).
+Table 3: Sensitivity of predicted target impact across intervention levels (theta) from Canonical Run.
 ```
 
-| Candidate Concept | $\theta = 0.60$ | $\theta = 0.75$ | $\theta = 0.85$ (Default) | $\theta = 0.95$ | Ranking Stability |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| **KC 0** (*Multiplication principle*) | +0.18% | +0.35% | **+0.49%** | +0.63% | **Rank 1 (Monotonic)** |
-| **KC 2** (*Item matching*) | +0.09% | +0.21% | **+0.30%** | +0.39% | **Rank 2 (Monotonic)** |
+| Target Concept | Candidate Prerequisite | $\theta = 0.60$ | $\theta = 0.75$ | $\theta = 0.85$ (Default) | $\theta = 0.95$ | Ranking Stability |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: |
+| **KC 4** (*Object quantity combination*) | **KC 0** (*Multiplication principle*) | +0.40% | +1.07% | **+1.51%** | +1.99% | **Rank 1 (Monotonic)** |
+| **KC 4** (*Object quantity combination*) | **KC 2** (*Item matching*) | +0.28% | +0.35% | **+0.65%** | +0.97% | **Rank 2 (Monotonic)** |
+| **KC 5** (*Route matching problem*) | **KC 0** (*Multiplication principle*) | +0.40% | +1.07% | **+1.51%** | +1.99% | **Rank 1 (Monotonic)** |
+| **KC 5** (*Route matching problem*) | **KC 4** (*Object quantity combination*) | +0.39% | +0.98% | **+1.36%** | +1.72% | **Rank 2 (Monotonic)** |
+| **KC 5** (*Route matching problem*) | **KC 2** (*Item matching*) | +0.28% | +0.35% | **+0.65%** | +0.97% | **Rank 3 (Monotonic)** |
 
-- **Empirical Finding:** As intervention intensity increases from 0.60 to 0.95, estimated impact scales smoothly and monotonically. The ranking order remains perfectly invariant, demonstrating robust numerical stability.
+- **Empirical Finding:** Across all candidate concepts and target nodes, estimated downstream counterfactual impact scales smoothly and monotonically with respect to intervention intensity $\theta$. The relative candidate priority ranking remains perfectly stable and invariant across all tested intensity regimes ($\theta \in [0.60, 0.95]$), with KC 0 providing the highest marginal impact followed by KC 4 and KC 2.
 
 ---
 

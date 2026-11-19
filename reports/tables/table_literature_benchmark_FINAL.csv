@@ -1,0 +1,7 @@
+Model,Year,Venue,Architecture,Input Features,Reported AUC,Reported Accuracy,Source
+DKT,2015,NeurIPS 2015,Recurrent Neural Network (LSTM / RNN),Sequential concept-response tuples (sequence length up to 200),0.785 - 0.835,0.742 - 0.760,Piech et al. (NeurIPS 2015) / XES3G5M Benchmark (Liu et al. NeurIPS 2023)
+SAKT,2019,EDM 2019,Self-Attention Transformer Encoder,Interaction sequence self-attention measuring past exercise dependencies,0.769 - 0.795,0.730 - 0.755,Pandey & Karypis (EDM 2019) / XES3G5M Benchmark (Liu et al. NeurIPS 2023)
+GKT,2019,WI 2019,Graph Neural Network (GNN) on Concept Transition Graph,Concept transition statistics + response sequence message passing,0.772 - 0.799,0.735 - 0.752,Nakagawa et al. (WI 2019) / XES3G5M Benchmark (Liu et al. NeurIPS 2023)
+AKT,2020,ACM KDD 2020,Context-Aware Attention with Psychometric Decay,Question IDs Concept IDs response strings relative temporal distance,0.820 - 0.843,0.765 - 0.782,Ghosh et al. (ACM KDD 2020) / XES3G5M Benchmark (Liu et al. NeurIPS 2023)
+C-PrIM Proposed GNN,2026,IEEE Transaction / Conference (This Study),GCN-style Relational Graph Neural Network,Recency-weighted concept mastery vector + curriculum taxonomy DAG adjacency (zero question-text / ID leakage),0.7073 +/- 0.0104,0.6160 (BalAcc 0.6475; Multi-Seed BalAcc 0.6575 +/- 0.0217),Local Empirical Evaluation (Canonical Run: reports/evidence_final_20261111)
+

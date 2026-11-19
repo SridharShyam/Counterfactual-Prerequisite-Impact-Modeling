@@ -1,0 +1,9 @@
+Metric,Baseline_Logistic,GNN_Default_tau_0.5,GNN_ValSelected_tau,Absolute_Delta_vs_Baseline
+ROC-AUC,0.7035,0.706,0.706,0.0025
+PR-AUC,0.8655,0.8775,0.8775,0.012
+Accuracy,0.804,0.8033,0.616,-0.188
+Precision,0.8047,0.8029,0.8789,0.0742
+Recall,0.9907,0.9932,0.5922,-0.3985
+F1_Score,0.888,0.888,0.7076,-0.1804
+Log_Loss,0.4665,0.4562,0.4562,-0.0103
+Brier_Score,0.1465,0.1446,0.1446,-0.0019
