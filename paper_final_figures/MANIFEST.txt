@@ -13,9 +13,8 @@ Figure 1: Pipeline Architecture
 Final Files:
   - paper_final_figures/Fig1_Architecture.pdf
   - paper_final_figures/Fig1_Architecture.png
-Source Files:
-  - reports/figures_final/fig1_cflp_pipeline_architecture.pdf
-  - reports/figures_final/fig1_cflp_pipeline_architecture.png
+Title Embedded in Image:
+  "Fig 1: Counterfactual Learning Path (C-PrIM) System Architecture & Pipeline"
 Intended IEEE Section:
   Section IV.A (System Architecture), Fig. 1
 One-Line Caption:
@@ -29,9 +28,8 @@ Figure 2: Receiver Operating Characteristic (ROC) Curves
 Final Files:
   - paper_final_figures/Fig2_ROC_Curves.pdf
   - paper_final_figures/Fig2_ROC_Curves.png
-Source Files:
-  - reports/figures_final/fig5_roc_curves.pdf
-  - reports/figures_final/fig5_roc_curves.png
+Title Embedded in Image:
+  "Fig 2: Receiver Operating Characteristic (ROC) on Held-Out Test Set"
 Intended IEEE Section:
   Section V.C (Predictive Performance Comparison), Fig. 2
 One-Line Caption:
@@ -45,9 +43,8 @@ Figure 3: Personalized Learning Path Sequence Comparison
 Final Files:
   - paper_final_figures/Fig3_Path_Comparison.pdf
   - paper_final_figures/Fig3_Path_Comparison.png
-Source Files:
-  - reports/figures_final/fig10_personalized_path_examples.pdf
-  - reports/figures_final/fig10_personalized_path_examples.png
+Title Embedded in Image:
+  "Fig 3: Personalized Learning Path Sequence Comparison (Target KC 5)"
 Intended IEEE Section:
   Section VI.B (Personalized Path Generation Case Study), Fig. 3
 One-Line Caption:
@@ -61,9 +58,8 @@ Figure 4: Counterfactual Intervention Sensitivity Analysis
 Final Files:
   - paper_final_figures/Fig4_Sensitivity.pdf
   - paper_final_figures/Fig4_Sensitivity.png
-Source Files:
-  - reports/figures_final/counterfactual_sensitivity.pdf
-  - reports/figures_final/counterfactual_sensitivity.png
+Title Embedded in Image:
+  "Fig 4: Counterfactual Prerequisite Impact Sensitivity Across Intervention Levels (\theta)"
 Intended IEEE Section:
   Section VI.C (Sensitivity Analysis), Fig. 4
 One-Line Caption:
