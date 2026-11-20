@@ -25,11 +25,11 @@ def regenerate_fig8():
     auc_errs = [0, 0, 0, std_val]
     colors = ["#94a3b8", "#94a3b8", "#94a3b8", "#4338ca"]
     
-    fig, ax = plt.subplots(figsize=(6, 4), dpi=300)
+    fig, ax = plt.subplots(figsize=(6.8, 4.2), dpi=300)
     ax.bar(seeds, auc_vals, yerr=auc_errs, capsize=5, color=colors, edgecolor="black", width=0.55)
     ax.set_ylim(0.65, 0.75)
     ax.set_ylabel("Test ROC-AUC", fontweight="bold")
-    ax.set_title("Figure 8: Multi-Seed Robustness Across Independent Seeds", fontweight="bold")
+    ax.set_title("Figure 8: Multi-Seed Robustness Across Independent Seeds", fontweight="bold", fontsize=10, pad=10)
     
     for i, v in enumerate(auc_vals):
         ax.text(i, v + 0.005, f"{v:.4f}", ha="center", fontweight="bold")

@@ -68,6 +68,24 @@ Canvas Margin Verification:
   Verified (Regenerated with expanded canvas width W=2550px, fontsize=10 to resolve clipping bug). Left margin: 338px, Right margin: 154px.
 
 ----------------------------------------------------------------------------------------------------
+Figure 5: Multi-Seed Robustness Across Independent Seeds
+----------------------------------------------------------------------------------------------------
+Final Files:
+  - paper_final_figures/Fig5_MultiSeed_Robustness.pdf
+  - paper_final_figures/Fig5_MultiSeed_Robustness.png
+Source Files:
+  - reports/figures_final/fig8_multiseed_robustness.pdf
+  - reports/figures_final/fig8_multiseed_robustness.png
+Title Embedded in Image:
+  "Figure 8: Multi-Seed Robustness Across Independent Seeds"
+Intended IEEE Section:
+  Section V.E (Robustness & Multi-Seed Validation), Fig. 5
+One-Line Caption:
+  Test ROC-AUC stability across three independent random seeds ({42, 123, 999}), demonstrating empirical consistency (Seed 42: 0.7060, Seed 123: 0.7183, Seed 999: 0.6977; Mean = 0.7073 +/- 0.0104) without performance collapse.
+Canvas Margin Verification:
+  Verified (Regenerated with expanded canvas width W=2040px, fontsize=10 to resolve clipping bug). Left margin: 224px, Right margin: 42px.
+
+----------------------------------------------------------------------------------------------------
 Excluded Figures Audit (Reviewed and intentionally omitted from the final manuscript):
 ----------------------------------------------------------------------------------------------------
 - fig2_knowledge_graph_overview: Excluded.
@@ -75,6 +93,5 @@ Excluded Figures Audit (Reviewed and intentionally omitted from the final manusc
 - fig4_training_validation_curves: Excluded.
 - fig6_precision_recall_curves: Excluded.
 - fig7_metric_comparison_plot: Excluded.
-- fig8_multiseed_robustness: Excluded from main paper figures (data retained in Table III / table7).
 - fig9_counterfactual_impact_distribution: Excluded from main paper figures (data retained in Table II / table4).
 ====================================================================================================
