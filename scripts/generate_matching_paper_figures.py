@@ -151,4 +151,41 @@ fig4.savefig(paper_dir / "Fig4_Sensitivity.png", dpi=300)
 fig4.savefig(paper_dir / "Fig4_Sensitivity.pdf")
 plt.close(fig4)
 
+# -------------------------------------------------------------------------
+# Fig 5: Multi-Seed Robustness Plot
+# File name: Fig5_MultiSeed_Robustness.pdf / .png
+# Title inside image: "Fig 5: Multi-Seed Robustness Across Independent Seeds"
+# -------------------------------------------------------------------------
+print("Generating Fig 5...")
+table7_path = proj / "reports" / "tables" / "table7_multi_seed_robustness.csv"
+df7 = pd.read_csv(table7_path)
+
+seeds = ["Seed 42", "Seed 123", "Seed 999", "Mean +/- Std"]
+s42 = float(df7[df7["Seed"] == "42"]["ROC_AUC"].values[0])
+s123 = float(df7[df7["Seed"] == "123"]["ROC_AUC"].values[0])
+s999 = float(df7[df7["Seed"] == "999"]["ROC_AUC"].values[0])
+
+mean_str = df7[df7["Seed"] == "Mean +/- Std"]["ROC_AUC"].values[0]
+mean_val = float(mean_str.split("+/-")[0].strip())
+std_val = float(mean_str.split("+/-")[1].strip())
+
+auc_vals = [s42, s123, s999, mean_val]
+auc_errs = [0, 0, 0, std_val]
+colors = ["#94a3b8", "#94a3b8", "#94a3b8", "#4338ca"]
+
+fig5, ax5 = plt.subplots(figsize=(6.8, 4.2), dpi=300)
+ax5.bar(seeds, auc_vals, yerr=auc_errs, capsize=5, color=colors, edgecolor="black", width=0.55)
+ax5.set_ylim(0.65, 0.75)
+ax5.set_ylabel("Test ROC-AUC", fontweight="bold")
+ax5.set_title("Fig 5: Multi-Seed Robustness Across Independent Seeds", fontweight="bold", fontsize=10, pad=10)
+
+for i, v in enumerate(auc_vals):
+    ax5.text(i, v + 0.005, f"{v:.4f}", ha="center", fontweight="bold")
+ax5.grid(axis="y", linestyle="--", alpha=0.5)
+fig5.tight_layout()
+
+fig5.savefig(paper_dir / "Fig5_MultiSeed_Robustness.png", dpi=300)
+fig5.savefig(paper_dir / "Fig5_MultiSeed_Robustness.pdf")
+plt.close(fig5)
+
 print("All figures in paper_final_figures regenerated successfully with matching figure numbers.")

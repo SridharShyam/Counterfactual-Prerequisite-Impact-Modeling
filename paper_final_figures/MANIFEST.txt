@@ -77,7 +77,7 @@ Source Files:
   - reports/figures_final/fig8_multiseed_robustness.pdf
   - reports/figures_final/fig8_multiseed_robustness.png
 Title Embedded in Image:
-  "Figure 8: Multi-Seed Robustness Across Independent Seeds"
+  "Fig 5: Multi-Seed Robustness Across Independent Seeds"
 Intended IEEE Section:
   Section V.E (Robustness & Multi-Seed Validation), Fig. 5
 One-Line Caption:
